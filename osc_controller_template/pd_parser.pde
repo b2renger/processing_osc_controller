@@ -1,4 +1,4 @@
-void parse_patch(String[] lines) {
+void parse_patch(String[] lines, Tab tab) {
   for (int i = 0; i < lines.length; i++) {
     //println(i, lines[i]);
 
@@ -12,6 +12,7 @@ void parse_patch(String[] lines) {
         .setPosition(int(s[2]), int(s[3]))
         .setRange(int(s[7]), int(s[8]))
         .setSize(int(s[5]), int(s[6]))
+        .moveTo(tab)
         ;
       s1.addCallback(new CallbackListener() {
         public void controlEvent(CallbackEvent theEvent) {
