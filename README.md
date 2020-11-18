@@ -20,20 +20,26 @@ The process will consist of using Pure-Data as a WYSIWYG editor for interfaces. 
 - (optionally) run in android-mode to get an android app.
 
 ## What should be supported ?
-x buttons
-x toggles
-x sliders
-x radio button
-x 2d-pad
-x selection through a list of items
-x color selector
-x text-entry
 
-x edit multiple page layouts
-x customize colors
+* [ ] buttons
+* [ ] toggles
+* [x] horizontal sliders
+* [ ] vertical sliders
+* [ ] radio button
+* [ ] 2d-pad
+* [ ] selection through a list of items
+* [ ] color selector
+* [ ] text-entry
+
+* [ ] support multiple screen sizes
+* [x] edit multiple page layouts
+* [ ] customize colors
+* [ ] specific android version with sensors data
 
 ## What is OSC ?
 
 ## What is Pure-data ?
 
 ## How to build an interface with Pure-Data ?
+
+## Anrdoid How-to
