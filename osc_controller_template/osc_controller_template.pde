@@ -1,6 +1,8 @@
-// deal with screens sizes
+
 // add a global variable PORTRAIT VS LANDSCAPE and provide pd-template for landscape
 // add global variables to store color mods
+// add gui elements
+// add sensors values for android ? (with ketai ?)
 
 import oscP5.*;
 import netP5.*;
@@ -16,6 +18,9 @@ int port = 1234;
 
 String[] pages = {"hslider_layout"}; // name of the pd patch to use as layout
 PFont font ;
+int patchWidth = 600;
+int patchHeight = 800;
+
 
 void setup() {
   size(600, 800);
