@@ -31,10 +31,10 @@ The process will consist of using Pure-Data as a WYSIWYG editor for interfaces. 
 * [ ] color selector
 * [ ] text-entry
 
-* [ ] support multiple screen sizes
+* [x] support multiple screen sizes
 * [x] edit multiple page layouts
-* [ ] customize colors
-* [ ] specific android version with sensors data
+* [x] customize colors
+* [ ] specific android version with sensors data or ifdef like system
 
 ## What is OSC ?
 
