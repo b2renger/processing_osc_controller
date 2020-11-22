@@ -71,6 +71,39 @@ void parse_patch(String[] lines, Tab tab) {
       );
     }
     
+    ///////////////////////////////////////////////////////////////////
+    // check buttons
+    if (s.length>10 && s[1].contains("obj") && s[4].contains("bng")) {
+      float x = map(int(s[2]), 0, patchWidth, 0, width);
+      float y = map(int(s[3]), 0, patchHeight, 0, height);
+      float w = map(int(s[5]), 0, patchWidth, 0, width);
+      float h = map(int(s[7]), 0, patchHeight, 0, height);
+
+      Button b = cp5.addButton(s[11])
+        .setPosition(int(x), int(y))
+        .setSize(int(w), int(h))
+        .setFont(font)
+        .setColorBackground(cGuiback)
+        .setColorForeground(cGuifront)
+        .setColorActive(cActive)
+        .setColorCaptionLabel(cCaption)
+        .setColorLabel(cCaption)
+        .setColorValue(cCaption)
+        .moveTo(tab)
+        ;  
+      b.getCaptionLabel().align(ControlP5.CENTER, ControlP5.TOP_OUTSIDE);
+      b.addCallback(new CallbackListener() {
+        public void controlEvent(CallbackEvent theEvent) {
+          if (theEvent.getAction()==ControlP5.ACTION_BROADCAST) {
+            Controller c = theEvent.getController();
+            //println(index, c.getLabel(), c.getValue());
+            sendFloatMessage("/"+c.getLabel(), c.getValue());
+          }
+        }
+      }
+      );
+    }
+    
     
   }
 }
