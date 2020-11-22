@@ -1,7 +1,7 @@
-#N canvas 413 37 656 848 12;
+#N canvas 182 63 656 848 12;
 #X obj 25 22 cnv 15 600 800 empty empty empty 20 12 0 14 -233017 -66577
 0;
-#X obj 45 71 hsl 500 40 0 1 0 0 empty empty slider1 -2 -8 0 10 -262144
+#X obj 46 72 hsl 500 40 0 1 0 0 empty empty slider1 -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 45 131 hsl 500 40 0 1 0 0 empty empty slider2 -2 -8 0 10 -262144
 -1 -1 0 1;

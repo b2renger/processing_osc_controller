@@ -1,8 +1,7 @@
 
-// add a global variable PORTRAIT VS LANDSCAPE and provide pd-template for landscape
-// add global variables to store color mods
+
 // add gui elements
-// add sensors values for android ? (with ketai ?)
+
 
 import oscP5.*;
 import netP5.*;
@@ -16,22 +15,25 @@ int port = 1234;
 
 
 
-String[] pages = {"hslider_layout"}; // name of the pd patch to use as layout
+String[] pages = {"hslider_layout","test"}; // name of the pd patch to use as layout
 PFont font ;
 int patchWidth = 600;
 int patchHeight = 800;
 
-color cBack = #FFFFFF; // background
-color cGuiback = #120078; // gui background
-color cGuifront = #9d0191; // gui foreground
-color cActive = #fd3a69; // when last selected
+color cBack = #000000; // background
+color cGuiback = #5A5858; // gui background
+color cGuifront = #CECCCE; // gui foreground
+color cActive = #FFEAFC; // when last selected
 color cCaption = #FFFFFF; // texts around
+
+int fontSize = 16;
 
 
 void setup() {
   size(600, 800);
-  //orientation(PORTRAIT);
-  font = createFont("arial", 16);
+
+  font = createFont("arial", fontSize);
+
 
   oscP5 = new OscP5(this, 12000);
   myRemoteLocation = new NetAddress(ip, port);
