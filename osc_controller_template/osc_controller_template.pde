@@ -11,7 +11,7 @@ ControlP5 cp5;
 OscP5 oscP5;
 NetAddress myRemoteLocation;
 String ip = "127.0.0.1";
-int port = 1234;
+int port = 9000;
 
 
 
