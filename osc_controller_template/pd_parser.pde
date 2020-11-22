@@ -3,7 +3,7 @@ void parse_patch(String[] lines, Tab tab) {
 
     String[] s = split(lines[i], " ");
     if (s.length>4) println(i, s[4], s.length);
-  
+
     ///////////////////////////////////////////////////////////////////
     // check for horizontal sliders
     if (s.length>10 && s[1].contains("obj") && s[4].contains("hsl")) {
@@ -174,15 +174,15 @@ void parse_patch(String[] lines, Tab tab) {
       }
       );
     }
-    
-    
-    ///////////////////////////////////////////////////////////////////
-    // check for touch surface eg red canvas 
+
+
+    //////////////////////////////////////////////////////////////////////////
+    // check for touch surface eg  canvas with receive value set to "touch" 
     if (s.length>10 && s[1].contains("obj") && s[4].contains("cnv") && s[9].contains("touch")) {
       float x = map(int(s[2]), 0, patchWidth, 0, width);
       float y = map(int(s[3]), 0, patchHeight, 0, height);
-      float w = map(int(s[5])*fontSize, 0, patchWidth, 0, width); // pd uses a weird unit as width (eg characterd width)
-      float h = map(int(s[6]), 0, patchHeight, 0, height);
+      float w = map(int(s[6]), 0, patchWidth, 0, width); 
+      float h = map(int(s[7]), 0, patchHeight, 0, height);
       Slider2D s2 = cp5.addSlider2D(s[10])
         .setPosition(int(x), int(y))
         .setSize(int(w), int(h))
@@ -207,9 +207,40 @@ void parse_patch(String[] lines, Tab tab) {
       }
       );
     }
-    
-    
-    
-    
+
+    //////////////////////////////////////////////////////////////////////////////////////
+    // check for color selector surface eg  canvas with receive value set to "color" 
+    if (s.length>10 && s[1].contains("obj") && s[4].contains("cnv") && s[9].contains("color")) {
+      float x = map(int(s[2]), 0, patchWidth, 0, width);
+      float y = map(int(s[3]), 0, patchHeight, 0, height);
+      float w = map(int(s[6]), 0, patchWidth, 0, width);
+      float h = map(int(s[7]), 0, patchHeight, 0, height);
+      ColorWheel c = cp5.addColorWheel(s[10], int(x), int(y), int(h) )
+        .setRGB(color(128, 0, 255))
+        .setSize(int(w), int(h))
+        .setFont(font)
+        .setColorBackground(cGuiback)
+        .setColorForeground(cGuifront)
+        .setColorActive(cActive)
+        .setColorCaptionLabel(cCaption)
+        .setColorLabel(cCaption)
+        .setColorValue(cCaption)
+        .moveTo(tab)
+        ;  
+      c.getCaptionLabel().align(ControlP5.CENTER, ControlP5.BOTTOM_OUTSIDE);
+      c.addCallback(new CallbackListener() {
+        public void controlEvent(CallbackEvent theEvent) {
+          if (theEvent.getAction()==ControlP5.ACTION_BROADCAST) {
+            Controller c = theEvent.getController();
+            //color col = color(100,100,100,1);
+           //cp5.get(ColorWheel.class,"col").getRGB();
+            println( c.getLabel(), (color)c.getValue());
+            sendColorMessage("/"+c.getLabel(), (color)c.getValue());
+           // println(c.getValue());
+          }
+        }
+      }
+      );
+    }
   }
 }

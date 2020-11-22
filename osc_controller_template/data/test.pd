@@ -13,11 +13,11 @@
 -262144 -1 -1 0 1;
 #X obj 80 331 vradio 40 1 0 4 empty empty vradio1 0 -8 0 10 -262144
 -1 -1 0;
-#X obj 47 669 hradio 50 1 0 8 empty empty hradio1 0 -8 0 10 -262144
+#X obj 48 722 hradio 50 1 0 8 empty empty hradio1 0 -8 0 10 -262144
 -1 -1 0;
 #X obj 190 206 cnv 15 250 250 empty touch touch1 20 12 0 14 -262144
 -66577 0;
-#X obj 257 504 cnv 15 200 120 empty color color1 20 12 0 14 -4034 -66577
+#X obj 190 493 cnv 15 200 200 empty color color1 20 12 0 14 -4034 -66577
 0;
 #X obj 58 556 nbx 5 25 -1e+37 1e+37 0 0 empty empty number1 0 -8 0
 10 -262144 -1 -1 0 256;
