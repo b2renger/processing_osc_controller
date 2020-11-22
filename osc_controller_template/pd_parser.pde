@@ -105,5 +105,40 @@ void parse_patch(String[] lines, Tab tab) {
     }
     
     
+    ///////////////////////////////////////////////////////////////////
+    // check toggle
+    if (s.length>10 && s[1].contains("obj") && s[4].contains("tgl")) {
+      float x = map(int(s[2]), 0, patchWidth, 0, width);
+      float y = map(int(s[3]), 0, patchHeight, 0, height);
+      float w = map(int(s[5]), 0, patchWidth, 0, width);
+      float h = map(int(s[5]), 0, patchHeight, 0, height);
+
+      Toggle t = cp5.addToggle(s[9])
+        .setPosition(int(x), int(y))
+        .setSize(int(w), int(h*0.75))
+        .setFont(font)
+        .setColorBackground(cGuiback)
+        .setColorForeground(cGuifront)
+        .setColorActive(cActive)
+        .setColorCaptionLabel(cCaption)
+        .setColorLabel(cCaption)
+        .setColorValue(cCaption)
+        .setMode(ControlP5.SWITCH)
+        .moveTo(tab)
+        ;  
+      t.getCaptionLabel().align(ControlP5.CENTER, ControlP5.TOP_OUTSIDE);
+      t.addCallback(new CallbackListener() {
+        public void controlEvent(CallbackEvent theEvent) {
+          if (theEvent.getAction()==ControlP5.ACTION_BROADCAST) {
+            Controller c = theEvent.getController();
+            //println(index, c.getLabel(), c.getValue());
+            sendFloatMessage("/"+c.getLabel(), c.getValue());
+          }
+        }
+      }
+      );
+    }
+    
+    
   }
 }
