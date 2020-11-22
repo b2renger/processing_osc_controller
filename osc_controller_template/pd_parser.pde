@@ -36,7 +36,7 @@ void parse_patch(String[] lines, Tab tab) {
       }
       );
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     // check for vertical sliders
     if (s.length>10 && s[1].contains("obj") && s[4].contains("vsl")) {
@@ -70,7 +70,7 @@ void parse_patch(String[] lines, Tab tab) {
       }
       );
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     // check buttons
     if (s.length>10 && s[1].contains("obj") && s[4].contains("bng")) {
@@ -103,8 +103,8 @@ void parse_patch(String[] lines, Tab tab) {
       }
       );
     }
-    
-    
+
+
     ///////////////////////////////////////////////////////////////////
     // check toggle
     if (s.length>10 && s[1].contains("obj") && s[4].contains("tgl")) {
@@ -138,7 +138,40 @@ void parse_patch(String[] lines, Tab tab) {
       }
       );
     }
-    
-    
+
+    ///////////////////////////////////////////////////////////////////
+    // check for numbers 
+    if (s.length>10 && s[1].contains("obj") && s[4].contains("nbx")) {
+      float x = map(int(s[2]), 0, patchWidth, 0, width);
+      float y = map(int(s[3]), 0, patchHeight, 0, height);
+      float w = map(int(s[5])*fontSize, 0, patchWidth, 0, width); // pd uses a weird unit as width (eg characterd width)
+      float h = map(int(s[6]), 0, patchHeight, 0, height);
+
+      Numberbox n = cp5.addNumberbox(s[13])
+        .setPosition(int(x), int(y))
+        .setSize(int(w), int(h))
+        .setMultiplier(0.1) // set the sensitifity of the numberbox
+        .setDirection(Controller.HORIZONTAL) 
+        .setFont(font)
+        .setColorBackground(cGuiback)
+        .setColorForeground(cGuifront)
+        .setColorActive(cActive)
+        .setColorCaptionLabel(cCaption)
+        .setColorLabel(cCaption)
+        .setColorValue(cCaption)
+        .moveTo(tab)
+        ;  
+      n.getCaptionLabel().align(ControlP5.CENTER, ControlP5.BOTTOM_OUTSIDE);
+      n.addCallback(new CallbackListener() {
+        public void controlEvent(CallbackEvent theEvent) {
+          if (theEvent.getAction()==ControlP5.ACTION_BROADCAST) {
+            Controller c = theEvent.getController();
+            //println(index, c.getLabel(), c.getValue());
+            sendFloatMessage("/"+c.getLabel(), c.getValue());
+          }
+        }
+      }
+      );
+    }
   }
 }
