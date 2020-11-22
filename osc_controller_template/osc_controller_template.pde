@@ -15,7 +15,7 @@ int port = 9000;
 
 
 
-String[] pages = {"hslider_layout","test"}; // name of the pd patch to use as layout
+String[] pages = {"test"}; // name of the pd patch to use as layout
 PFont font ;
 int patchWidth = 600;
 int patchHeight = 800;
