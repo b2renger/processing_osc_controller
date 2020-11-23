@@ -19,7 +19,6 @@ void sendStringMessage(String addrPattern, String value) {
 
 void sendColorMessage(String addrPattern, color c) {
   OscMessage myMessage = new OscMessage(addrPattern);
-  println(red(c), green(c), blue(c), alpha(c));
   myMessage.add(red(c)); 
   myMessage.add(green(c)); 
   myMessage.add(blue(c)); 

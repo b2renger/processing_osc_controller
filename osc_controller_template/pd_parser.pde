@@ -2,7 +2,7 @@ void parse_patch(String[] lines, Tab tab) {
   for (int i = 0; i < lines.length; i++) {
 
     String[] s = split(lines[i], " ");
-    if (s.length>4) println(i, s[4], s.length);
+    //if (s.length>4) println(i, s[4], s.length);
 
     ///////////////////////////////////////////////////////////////////
     // check for horizontal sliders
@@ -231,16 +231,40 @@ void parse_patch(String[] lines, Tab tab) {
       c.addCallback(new CallbackListener() {
         public void controlEvent(CallbackEvent theEvent) {
           if (theEvent.getAction()==ControlP5.ACTION_BROADCAST) {
-            Controller c = theEvent.getController();
-            //color col = color(100,100,100,1);
-           //cp5.get(ColorWheel.class,"col").getRGB();
-            println( c.getLabel(), (color)c.getValue());
+            Controller c = theEvent.getController();        
             sendColorMessage("/"+c.getLabel(), (color)c.getValue());
-           // println(c.getValue());
           }
         }
       }
       );
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////////////////
+    // check for text
+    if (s.length>3 && s[1].contains("text") ) {
+      float x = map(int(s[2]), 0, patchWidth, 0, width);
+      float y = map(int(s[3]), 0, patchHeight, 0, height);
+      String t =" " ;
+      for (int j = 4; j < s.length; j++) { 
+        if (s[j].charAt(s[j].length()-1) == ';' ) {
+          s[j] =  s[j].substring(0, s[j].length() - 1);
+        }
+        t += s[j] + " " ;
+      }
+      cp5.addTextlabel(s[4])
+        .setText(t)
+        .setColorValue(0xffffff00)
+        .setPosition(int(x), int(y))
+        .setFont(font)
+        .setColorBackground(cGuiback)
+        .setColorForeground(cGuifront)
+        .setColorActive(cActive)
+        .setColorCaptionLabel(cCaption)
+        .setColorLabel(cCaption)
+        .setColorValue(cCaption)
+        .moveTo(tab)
+        ;
     }
   }
 }
