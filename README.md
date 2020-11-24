@@ -21,20 +21,24 @@ The process will consist of using Pure-Data as a WYSIWYG editor for interfaces. 
 
 ## What should be supported ?
 
-* [ ] buttons
-* [ ] toggles
+* [x] buttons
+* [x] toggles
 * [x] horizontal sliders
-* [ ] vertical sliders
-* [ ] radio button
-* [ ] 2d-pad
-* [ ] selection through a list of items
-* [ ] color selector
-* [ ] text-entry
+* [x] vertical sliders
+* [x] horizontal radio button
+* [x] vertical radio button
+* [x] 2d-pad
+* [x] color selector
+* [x] text
+* [ ] range slider ?
+* [ ] selection through a list of items ?
 
 * [x] support multiple screen sizes
 * [x] edit multiple page layouts
 * [x] customize colors
-* [ ] specific android version with sensors data or ifdef like system
+* [ ] specific android version with sensors data and fixes (like keyboard popping in textfields)
+* [ ] save and load presets ?
+
 
 ## What is OSC ?
 
