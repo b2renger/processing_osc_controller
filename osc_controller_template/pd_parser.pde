@@ -59,6 +59,7 @@ void parse_patch(String[] lines, Tab tab) {
         .setColorValue(cCaption)
         .moveTo(tab)
         ;  
+      s1.getValueLabel().align(ControlP5.CENTER, ControlP5.TOP_OUTSIDE).setPaddingX(0);
       s1.getCaptionLabel().align(ControlP5.CENTER, ControlP5.BOTTOM_OUTSIDE);
       s1.addCallback(new CallbackListener() {
         public void controlEvent(CallbackEvent theEvent) {
