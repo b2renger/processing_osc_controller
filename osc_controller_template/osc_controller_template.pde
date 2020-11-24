@@ -1,7 +1,4 @@
-
-
 // add gui elements
-
 
 import oscP5.*;
 import netP5.*;
@@ -25,6 +22,7 @@ color cGuiback = #5A5858; // gui background
 color cGuifront = #CECCCE; // gui foreground
 color cActive = #FFEAFC; // when last selected
 color cCaption = #FFFFFF; // texts around
+int radioItemsPerRow = 8;
 
 int fontSize = 16;
 

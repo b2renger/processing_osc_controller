@@ -116,7 +116,7 @@ void parse_patch(String[] lines, Tab tab) {
 
       Toggle t = cp5.addToggle(s[9])
         .setPosition(int(x), int(y))
-        .setSize(int(w), int(h*0.75))
+        .setSize(int(w), int(h))
         .setFont(font)
         .setColorBackground(cGuiback)
         .setColorForeground(cGuifront)
@@ -124,7 +124,7 @@ void parse_patch(String[] lines, Tab tab) {
         .setColorCaptionLabel(cCaption)
         .setColorLabel(cCaption)
         .setColorValue(cCaption)
-        .setMode(ControlP5.SWITCH)
+        //.setMode(ControlP5.SWITCH)
         .moveTo(tab)
         ;  
       t.getCaptionLabel().align(ControlP5.CENTER, ControlP5.TOP_OUTSIDE);
@@ -265,6 +265,48 @@ void parse_patch(String[] lines, Tab tab) {
         .setColorValue(cCaption)
         .moveTo(tab)
         ;
+    }
+
+
+    ///////////////////////////////////////////////////////////////////
+    // check for radio button
+    if (s.length>10 && s[1].contains("obj") && s[4].contains("hradio")) {
+      float x = map(int(s[2]), 0, patchWidth, 0, width);
+      float y = map(int(s[3]), 0, patchHeight, 0, height);
+      float w = map(int(s[5]), 0, patchWidth, 0, width);
+      float h = map(int(s[5]), 0, patchHeight, 0, height);
+
+      RadioButton r = cp5.addRadioButton(s[11])
+        .setPosition(int(x), int(y))
+        .setSize(int(w), int(h))
+        .setFont(font)
+        .setColorBackground(cGuiback)
+        .setColorForeground(cGuifront)
+        .setColorActive(cActive)
+        .setColorLabel(cCaption)
+        .setColorValue(cCaption)
+        .setItemsPerRow(radioItemsPerRow)
+        .setSpacingColumn(1)
+        .moveTo(tab)
+        ;  
+
+      for (int j = 0; j < int(s[8]); j++) {
+        r.addItem(s[11]+"-"+j, j);
+      }
+
+      for (Toggle t : r.getItems()) {
+        //t.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
+        t.getCaptionLabel().hide();
+        t.addListener(new ControlListener() {
+          public void controlEvent(ControlEvent theEvent) {
+           Controller c = theEvent.getController();
+           String[] msg = c.getLabel().split("-");
+           println("/"+ msg[0] + "/" + msg[1]);
+            sendFloatMessage("/"+ msg[0] + "/" + msg[1], c.getValue());
+          }
+        }
+        );
+      }
     }
   }
 }
