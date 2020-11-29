@@ -1,5 +1,8 @@
+Textfield iptext;
+Textfield porttext;
+
 void create_settings() {
-  cp5.addTextfield("ip")
+  iptext= cp5.addTextfield("ip")
     .setPosition(width*0.10, height*0.25)
     .setSize(int((width) *0.80 ), 80)
     .setFont(font)
@@ -10,11 +13,11 @@ void create_settings() {
     .setColorCaptionLabel(cCaption)
     .setColorLabel(cCaption)
     .setColorValue(cCaption)
-    .setAutoClear(false).moveTo("default")
-    .getCaptionLabel().align(ControlP5.RIGHT, ControlP5.CENTER).setPaddingX(5)
+    .setAutoClear(false).moveTo("default");
+  iptext.getCaptionLabel().align(ControlP5.RIGHT, ControlP5.CENTER).setPaddingX(5)
     ;
 
-  cp5.addTextfield("port")
+  porttext = cp5.addTextfield("port")
     .setPosition(width*0.1, height*0.5)
     .setSize(int(width  *0.80 ), 80)
     .setFont(font)
@@ -25,8 +28,8 @@ void create_settings() {
     .setColorCaptionLabel(cCaption)
     .setColorLabel(cCaption)
     .setColorValue(cCaption)
-    .setAutoClear(false).moveTo("default")
-    .getCaptionLabel().align(ControlP5.RIGHT, ControlP5.CENTER).setPaddingX(5)
+    .setAutoClear(false).moveTo("default");
+  porttext.getCaptionLabel().align(ControlP5.RIGHT, ControlP5.CENTER).setPaddingX(5)
     ;
 
   cp5.addBang("CONNECT")

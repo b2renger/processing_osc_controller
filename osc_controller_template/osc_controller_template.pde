@@ -10,9 +10,7 @@ NetAddress myRemoteLocation;
 String ip = "127.0.0.1";
 int port = 9000;
 
-
-
-String[] pages = {"test"}; // name of the pd patch to use as layout
+String[] pages = {"test", "hslider_layout"}; // name of the pd patch to use as layout
 PFont font ;
 int patchWidth = 600;
 int patchHeight = 800;
@@ -79,5 +77,7 @@ void setup() {
 
 void draw() {
   background(cBack);
+  
+  
   
 }
