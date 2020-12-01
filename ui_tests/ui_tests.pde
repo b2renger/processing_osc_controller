@@ -1,3 +1,10 @@
+/* TODO :
+- textfield
+- hradio
+- vradio
+- 2Dpad
+- color selector
+*/
 
 color cBack = #000000; // background
 color cGuiback = #5A5858; // gui background
@@ -15,7 +22,8 @@ void setup(){
   
   controllers.add(new HSlider(50, 50, 250, 50, "/hslider1", 0, 127));
   controllers.add(new VSlider(50, 150, 50, 250, "/vslider1", 0, 127));
-  
+  controllers.add(new Button(150, 150, 100,50, "/button1"));
+  controllers.add(new Toggle(150, 250, 100,50, "/toggle1"));
   
 }
 
