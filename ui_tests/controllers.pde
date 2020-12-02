@@ -42,8 +42,8 @@ class Button extends Controller {
       rect(xpos+innerPadding, ypos +innerPadding, w-innerPadding*2, h-innerPadding*2, rounded);
     }
     fill(255);
-    textAlign(CENTER, TOP);
-    text(label, xpos + w/2, ypos +h);
+    textAlign(CENTER, BOTTOM);
+    text(label, xpos + w/2, ypos);
   }
 
   void update(float mx, float my) {
@@ -79,8 +79,8 @@ class Toggle extends Controller {
       rect(xpos+innerPadding, ypos +innerPadding, w-innerPadding*2, h-innerPadding*2, rounded);
     }
     fill(255);
-    textAlign(CENTER, TOP);
-    text(label, xpos + w/2, ypos +h);
+    textAlign(CENTER, BOTTOM);
+    text(label, xpos + w/2, ypos );
   }
 
   void update(float mx, float my) {

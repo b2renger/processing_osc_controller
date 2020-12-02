@@ -14,14 +14,16 @@ class NumberField extends Controller {
 
   void draw() {
     noStroke();
-    if (focus) {
-      fill(colorFront);
-      rect(xpos, ypos, w, h, rounded);
-    }
-    
     fill(colorBack);
-    rect(xpos+innerPadding, ypos +innerPadding, w-innerPadding*2, h-innerPadding*2, rounded);
-  
+    rect(xpos, ypos, w, h, rounded);
+    if (focus) {
+      noFill();
+      stroke(colorFront);
+      strokeWeight(innerPadding);
+      rect(xpos, ypos, w, h, rounded);
+      strokeWeight(1);
+    }
+     
     fill(255);
     textAlign(LEFT, TOP);
     text(label, xpos, ypos +h);

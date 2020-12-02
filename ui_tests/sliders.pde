@@ -66,10 +66,10 @@ class VSlider extends Controller {
     rect(xpos+innerPadding, ypos + h-innerPadding, w-innerPadding*2,- pos, rounded);
 
     fill(255);
-    textAlign(CENTER, TOP);
-    text(label , xpos + w/2, ypos +h);
     textAlign(CENTER, BOTTOM);
-    text(int(value), xpos +w/2 , ypos);
+    text(label , xpos + w/2, ypos );
+    textAlign(CENTER, TOP);
+    text(int(value), xpos +w/2 , ypos+h);
   }
 
   void update(float mx, float my) {
