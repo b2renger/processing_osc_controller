@@ -26,8 +26,9 @@ void setup() {
   controllers.add(new VSlider(50, 150, 50, 250, "/vslider1", 0, 127));
   controllers.add(new Button(150, 150, 100, 50, "/button1"));
   controllers.add(new Toggle(150, 250, 100, 50, "/toggle1"));
-  //controllers.add(new TextField(150, 350, 300,50, "Ip adress"));
   controllers.add(new NumberField(150, 350, 300, 50, "Ip adress"));
+  controllers.add(new HRadio(350, 50, 300, 50, "/hradio1", 6));
+  
 }
 
 
@@ -37,7 +38,7 @@ void draw() {
 
   for (int i = 0; i < controllers.size(); i++) {
     Controller c = controllers.get(i);
-    println(c.getClass());
+   
     c.draw();
     c.update(mouseX, mouseY);
   }
