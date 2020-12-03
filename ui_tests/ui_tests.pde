@@ -1,8 +1,5 @@
 /* TODO :
- 
- - hradio
- - vradio
- - 2Dpad
+
  - color selector
  */
 
@@ -29,7 +26,7 @@ void setup() {
   controllers.add(new NumberField(150, 350, 150, 50, "Ip adress"));
   controllers.add(new HRadio(350, 50, 300, 50, "/hradio1", 6));
   controllers.add(new VRadio(350, 150, 50, 200, "/vradio1", 4));
-  
+  controllers.add(new Pad(450, 150, 200, 200, "/pad1", 0,127));
 }
 
 
@@ -39,7 +36,7 @@ void draw() {
 
   for (int i = 0; i < controllers.size(); i++) {
     Controller c = controllers.get(i);
-   
+
     c.draw();
     c.update(mouseX, mouseY);
   }

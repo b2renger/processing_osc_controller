@@ -22,10 +22,12 @@ class Controller {
 }
 
 
+
+
 class Button extends Controller {
 
   float rounded = 10;
-  float borderTolerance = 10; // on left and right to have min max value more easily
+
   float innerPadding = 4;
   boolean pressed = false;
 
