@@ -7,7 +7,6 @@ The process will consist of using Pure-Data as a WYSIWYG editor for interfaces. 
 
 ## Software dependencies
 
-- ControlP5 lib for processing
 - OSCP5 lib for processing
 - android mode for processing (optional)
 
@@ -15,7 +14,7 @@ The process will consist of using Pure-Data as a WYSIWYG editor for interfaces. 
 - create a pd patch with gui elements
 - open the processing template and save it somewhere
 - drop the pd patch containing the interface on the processing window
-- click run (you should see a replicate of the interface you built but with osc networking)
+- click run (you should see a replicate of the interface you built but with osc networking options)
 
 - (optionally) run in android-mode to get an android app.
 
@@ -30,8 +29,7 @@ The process will consist of using Pure-Data as a WYSIWYG editor for interfaces. 
 * [x] 2d-pad
 * [x] color selector
 * [x] text
-* [ ] range slider ?
-* [ ] selection through a list of items ?
+
 
 * [x] support multiple screen sizes
 * [x] edit multiple page layouts
