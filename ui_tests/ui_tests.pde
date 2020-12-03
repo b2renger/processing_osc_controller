@@ -1,6 +1,10 @@
 /* TODO :
-
+ - text label
  - color selector
+ - tabbed interface
+ - setters for rounded / innerPadding
+ - onChange functions
+ 
  */
 
 color cBack = #000000; // background
