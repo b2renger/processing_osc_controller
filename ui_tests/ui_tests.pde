@@ -1,9 +1,11 @@
 /* TODO :
  - text label
  - color selector
- - tabbed interface
+ - tabbed interface : function moveTo / based on Hradio
  - setters for rounded / innerPadding
  - onChange functions
+ - getters for values
+ - change
  
  */
 
@@ -17,7 +19,7 @@ ArrayList<Controller> controllers;
 NumberField nf;
 
 void setup() {
-  size(800, 600);
+  size(800, 800);
   pixelDensity(1);
   textSize(18);
 
@@ -31,6 +33,7 @@ void setup() {
   controllers.add(new HRadio(350, 50, 300, 50, "/hradio1", 6));
   controllers.add(new VRadio(350, 150, 50, 200, "/vradio1", 4));
   controllers.add(new Pad(450, 150, 200, 200, "/pad1", 0,127));
+  controllers.add(new ColorSelector(450, 400, 200, 200, "/color1"));
 }
 
 
