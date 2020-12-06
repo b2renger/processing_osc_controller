@@ -8,7 +8,7 @@ class HSlider extends Controller {
   float innerPadding = 4; // padding between back and front
 
   HSlider(float xpos, float ypos, float w, float h, String label, float min, float max) {
-    super( xpos, ypos, w, h, label);
+    super( xpos, ypos, label);
     this.value = 0;
     this.pos = map(value, min, max, 0, w);
     this.min = min;
@@ -51,7 +51,7 @@ class VSlider extends Controller {
   float innerPadding = 4; // padding between back and front
 
   VSlider(float xpos, float ypos, float w, float h, String label, float min, float max) {
-    super( xpos, ypos, w, h, label);
+    super( xpos, ypos, label);
     this.value = 0;
     this.pos = map(value, min, max, 0, w);
     this.min = min;

@@ -10,7 +10,7 @@ class Pad extends Controller {
   float borderTolerance = 10;
 
   Pad(float xpos, float ypos, float w, float h, String label, float min, float max) {
-    super( xpos, ypos, w, h, label);
+    super( xpos, ypos, label);
     this.min = min;
     this.max = max;
     this.w = w;

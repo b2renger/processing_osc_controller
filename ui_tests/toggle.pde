@@ -8,7 +8,7 @@ class Toggle extends Controller {
   boolean change = true;
 
   Toggle(float xpos, float ypos, float w, float h, String label) {
-    super( xpos, ypos, w, h, label);
+    super( xpos, ypos, label);
     this.w = w;
     this.h = h;
   }

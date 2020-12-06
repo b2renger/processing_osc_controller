@@ -5,10 +5,9 @@ class Controller {
   color colorBack;
   color colorFront;
 
-  Controller(float xpos, float ypos, float w, float h, String label) {
+  Controller(float xpos, float ypos, String label) {
     this.xpos = xpos;
     this.ypos = ypos;
-
     this.label = label;
     colorBack = cGuiback;
     colorFront = cGuifront;

@@ -10,7 +10,7 @@ class HRadio extends Controller {
   float outterPadding = 2;
 
   HRadio(float xpos, float ypos, float w, float h, String label, int nElts) {
-    super( xpos, ypos, w, h, label);
+    super( xpos, ypos, label);
     this.nElts = nElts;
     this.w = w;
     this.h = h;
@@ -60,7 +60,7 @@ class VRadio extends Controller {
   float outterPadding = 2;
 
   VRadio(float xpos, float ypos, float w, float h, String label, int nElts) {
-    super( xpos, ypos, w, h, label);
+    super( xpos, ypos, label);
     this.nElts = nElts;
     this.w = w;
     this.h = h;

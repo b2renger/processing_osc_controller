@@ -34,6 +34,7 @@ void setup() {
   controllers.add(new VRadio(350, 150, 50, 200, "/vradio1", 4));
   controllers.add(new Pad(450, 150, 200, 200, "/pad1", 0,127));
   controllers.add(new ColorSelector(450, 400, 200, 200, "/color1"));
+  controllers.add(new TextLabel(50, 450, "text to give information about something", color(255)));
 }
 
 
