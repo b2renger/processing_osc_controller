@@ -1,6 +1,6 @@
 class Controller {
   float xpos, ypos;
-  float w, h;
+ 
   String label;
   color colorBack;
   color colorFront;
@@ -8,8 +8,7 @@ class Controller {
   Controller(float xpos, float ypos, float w, float h, String label) {
     this.xpos = xpos;
     this.ypos = ypos;
-    this.w = w;
-    this.h = h;
+
     this.label = label;
     colorBack = cGuiback;
     colorFront = cGuifront;

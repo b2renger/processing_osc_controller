@@ -1,6 +1,6 @@
 
 class NumberField extends Controller {
-
+  float w, h;
   boolean focus = false;
   String content = "";
   float innerPadding = 4;
@@ -10,6 +10,8 @@ class NumberField extends Controller {
 
   NumberField(float xpos, float ypos, float w, float h, String label) {
     super(xpos, ypos, w, h, label);
+    this.w = w;
+    this.h = h;
   }
 
   void draw() {
@@ -23,7 +25,7 @@ class NumberField extends Controller {
       rect(xpos, ypos, w, h, rounded);
       strokeWeight(1);
     }
-     
+
     fill(255);
     textAlign(LEFT, TOP);
     text(label, xpos, ypos +h);

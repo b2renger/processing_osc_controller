@@ -1,5 +1,6 @@
 
 class HRadio extends Controller {
+  float w, h;
   float rounded = 100;
   boolean checked = false;
   boolean change = true;
@@ -11,6 +12,8 @@ class HRadio extends Controller {
   HRadio(float xpos, float ypos, float w, float h, String label, int nElts) {
     super( xpos, ypos, w, h, label);
     this.nElts = nElts;
+    this.w = w;
+    this.h = h;
     elts = new ArrayList();
     float eltsSize = (w - outterPadding * nElts)/nElts;
     for (int i = 0; i < nElts; i++) {
@@ -22,7 +25,7 @@ class HRadio extends Controller {
   void draw() {
     fill(255);
     textAlign(LEFT, BOTTOM);
-    text(label, xpos , ypos);
+    text(label, xpos, ypos);
     for (int i = 0; i < nElts; i++) {
       elts.get(i).draw();
     }
@@ -47,6 +50,7 @@ class HRadio extends Controller {
 
 
 class VRadio extends Controller {
+  float w, h;
   float rounded = 100;
   boolean checked = false;
   boolean change = true;
@@ -58,10 +62,12 @@ class VRadio extends Controller {
   VRadio(float xpos, float ypos, float w, float h, String label, int nElts) {
     super( xpos, ypos, w, h, label);
     this.nElts = nElts;
+    this.w = w;
+    this.h = h;
     elts = new ArrayList();
     float eltsSize = (h - outterPadding * nElts)/nElts;
     for (int i = 0; i < nElts; i++) {
-      elts.add(new Toggle(xpos , ypos + + eltsSize * i + outterPadding*i, eltsSize, eltsSize, "" ));
+      elts.add(new Toggle(xpos, ypos + + eltsSize * i + outterPadding*i, eltsSize, eltsSize, "" ));
       elts.get(i).rounded = this.rounded;
     }
   }
@@ -69,7 +75,7 @@ class VRadio extends Controller {
   void draw() {
     fill(255);
     textAlign(CENTER, BOTTOM);
-    text(label, xpos + w/2 , ypos);
+    text(label, xpos + w/2, ypos);
     for (int i = 0; i < nElts; i++) {
       elts.get(i).draw();
     }

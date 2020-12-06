@@ -1,18 +1,20 @@
 
 class HSlider extends Controller {
-
+  float w, h;
   float value, pos;
   float min, max;
   float rounded = 10;
   float borderTolerance = 10; // on left and right to have min max value more easily
   float innerPadding = 4; // padding between back and front
-  
+
   HSlider(float xpos, float ypos, float w, float h, String label, float min, float max) {
     super( xpos, ypos, w, h, label);
     this.value = 0;
     this.pos = map(value, min, max, 0, w);
     this.min = min;
     this.max = max;
+    this.w = w;
+    this.h = h;
   }
 
   void draw() {
@@ -26,7 +28,7 @@ class HSlider extends Controller {
 
     fill(255);
     textAlign(LEFT, BOTTOM);
-    text(label , xpos, ypos);
+    text(label, xpos, ypos);
     textAlign(RIGHT, BOTTOM);
     text(int(value), xpos + w, ypos);
   }
@@ -41,19 +43,21 @@ class HSlider extends Controller {
 
 
 class VSlider extends Controller {
-
+  float w, h;
   float value, pos;
   float min, max;
   float rounded = 10;
   float borderTolerance = 10; // on left and right to have min max value more easily
   float innerPadding = 4; // padding between back and front
-  
+
   VSlider(float xpos, float ypos, float w, float h, String label, float min, float max) {
     super( xpos, ypos, w, h, label);
     this.value = 0;
-    this.pos = map(value, min, max, 0,  w);
+    this.pos = map(value, min, max, 0, w);
     this.min = min;
     this.max = max;
+    this.w = w;
+    this.h = h;
   }
 
   void draw() {
@@ -63,13 +67,13 @@ class VSlider extends Controller {
 
     fill(colorFront);
     pos = constrain(map(value, min, max, 0, h-innerPadding*2), 0, h-innerPadding*2);
-    rect(xpos+innerPadding, ypos + h-innerPadding, w-innerPadding*2,- pos, rounded);
+    rect(xpos+innerPadding, ypos + h-innerPadding, w-innerPadding*2, - pos, rounded);
 
     fill(255);
     textAlign(CENTER, BOTTOM);
-    text(label , xpos + w/2, ypos );
+    text(label, xpos + w/2, ypos );
     textAlign(CENTER, TOP);
-    text(int(value), xpos +w/2 , ypos+h);
+    text(int(value), xpos +w/2, ypos+h);
   }
 
   void update(float mx, float my) {

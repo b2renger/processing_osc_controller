@@ -1,5 +1,5 @@
 class Pad extends Controller {
-
+  float w, h;
   float rounded = 10;
   float ex = 0;
   float wy = 0;
@@ -13,6 +13,8 @@ class Pad extends Controller {
     super( xpos, ypos, w, h, label);
     this.min = min;
     this.max = max;
+    this.w = w;
+    this.h = h;
   }
 
   void draw() {
@@ -23,14 +25,14 @@ class Pad extends Controller {
     stroke(colorFront);
     line(ex, ypos, ex, ypos+h);
     line(xpos, wy, xpos +w, wy);
-    
+
     fill(colorFront);
-    ellipse(ex,wy,10,10);
-    
+    ellipse(ex, wy, 10, 10);
+
     fill(255);
     textAlign(LEFT, BOTTOM);
-    text(label, xpos , ypos);
-    
+    text(label, xpos, ypos);
+
     fill(255);
     textAlign(RIGHT, BOTTOM);
     text("("+int(xvalue) +","+int(yvalue)+")", xpos + w, ypos);
@@ -39,7 +41,7 @@ class Pad extends Controller {
   void update(float mx, float my) {
     if (mx > xpos -  borderTolerance && mx <xpos + w  +  borderTolerance 
       && my> ypos - borderTolerance && my < ypos +h + borderTolerance  && mousePressed) {
-      xvalue = constrain(map(mx, xpos, xpos + w, min, max),min,max);
+      xvalue = constrain(map(mx, xpos, xpos + w, min, max), min, max);
       yvalue = constrain(map(my, ypos, ypos +h, min, max), min, max);
       ex = constrain(mx, xpos, xpos +w);
       wy = constrain(my, ypos, ypos+h);

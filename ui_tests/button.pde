@@ -1,6 +1,6 @@
 
 class Button extends Controller {
-
+  float w,h;
   float rounded = 10;
 
   float innerPadding = 4;
@@ -8,6 +8,8 @@ class Button extends Controller {
 
   Button(float xpos, float ypos, float w, float h, String label) {
     super( xpos, ypos, w, h, label);
+    this.w = w;
+    this.h = h;
   }
 
   void draw() {

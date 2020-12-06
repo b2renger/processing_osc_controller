@@ -1,6 +1,6 @@
 
 class Toggle extends Controller {
-
+  float w, h;
   float rounded = 10;
   float borderTolerance = 10; // on left and right to have min max value more easily
   float innerPadding = 4;
@@ -9,6 +9,8 @@ class Toggle extends Controller {
 
   Toggle(float xpos, float ypos, float w, float h, String label) {
     super( xpos, ypos, w, h, label);
+    this.w = w;
+    this.h = h;
   }
 
   void draw() {

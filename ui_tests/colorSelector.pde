@@ -1,6 +1,6 @@
 
 class ColorSelector extends Controller {
-
+  float w,h;
   float rounded = 10;
   float r = 255, g = 0, b =0;
   float borderTolerance = 10;
@@ -9,19 +9,17 @@ class ColorSelector extends Controller {
 
   ColorSelector(float xpos, float ypos, float w, float h, String label) {
     super( xpos, ypos, w, h, label);
+    this.w = w;
+    this.h = h;
 
     pg = createGraphics(int(w), int(h));
     pg.beginDraw();
-
-
     pg.colorMode(HSB, 360, 100, 100, 100);
-
     if (!radial) {
       float sat=100; 
       float br=100;
       for (float i = 0; i <   w; i++) {
         for (float j = 0; j <  h*0.95; j++) {
-
           float hu = map(j, 0, h*.95, 0, 360);
           if ( i <= w*.5 ) {
             sat = map(i, 0, w*.5, 0, 100);
@@ -36,18 +34,14 @@ class ColorSelector extends Controller {
         }
       }
     } else {
-
       for (float angle = 0; angle <= TWO_PI; angle+=0.01) {
-
         for ( float rad = 0; rad <= h*.45; rad +=0.1) {
           float hu = map(angle, 0, TWO_PI, 0, 360);
           float sat=100; 
-          float br=100;
-          
-          if (rad < h*.23){
+          float br=100;      
+          if (rad < h*.23) {
             sat = map( rad, 0, h*.23, 0, 100);
-          }
-          else{
+          } else {
             br = map( rad, h*.25, h*.45, 100, 0);
           }
           float x =  w*.5 + rad*cos(angle);

@@ -1,6 +1,6 @@
 /* TODO :
  - text label
- - color selector
+
  - tabbed interface : function moveTo / based on Hradio
  - setters for rounded / innerPadding
  - onChange functions
