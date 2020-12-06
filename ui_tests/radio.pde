@@ -38,10 +38,9 @@ class HRadio extends Controller {
 
       if (t.checked == true  ) {
         value = i;
-      } else {
-        for (int j = 0; j < nElts; j++) {
-          if (value!=j) elts.get(j).checked = false;
-        }
+      } 
+      for (int j = 0; j < nElts; j++) {
+        if (value!=j) elts.get(j).checked = false;
       }
     }
   }
@@ -88,10 +87,9 @@ class VRadio extends Controller {
 
       if (t.checked == true  ) {
         value = i;
-      } else {
-        for (int j = 0; j < nElts; j++) {
-          if (value!=j) elts.get(j).checked = false;
-        }
+      } 
+      for (int j = 0; j < nElts; j++) {
+        if (value!=j) elts.get(j).checked = false;
       }
     }
   }

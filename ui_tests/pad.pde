@@ -15,6 +15,8 @@ class Pad extends Controller {
     this.max = max;
     this.w = w;
     this.h = h;
+    this.ex = xpos;
+    this.wy = ypos;
   }
 
   void draw() {

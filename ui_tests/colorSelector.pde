@@ -1,6 +1,6 @@
 
 class ColorSelector extends Controller {
-  float w,h;
+  float w, h;
   float rounded = 10;
   float r = 255, g = 0, b =0;
   float borderTolerance = 10;
@@ -34,7 +34,7 @@ class ColorSelector extends Controller {
         }
       }
     } else {
-      for (float angle = 0; angle <= TWO_PI; angle+=0.01) {
+      for (float angle = 0; angle <= TWO_PI; angle+=0.005) {
         for ( float rad = 0; rad <= h*.45; rad +=0.1) {
           float hu = map(angle, 0, TWO_PI, 0, 360);
           float sat=100; 
