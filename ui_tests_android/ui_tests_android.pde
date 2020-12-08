@@ -14,54 +14,57 @@ color cCaption = #FFFFFF; // texts around
 ArrayList<Controller> controllers;
 Tab tabs;
 
+float minHeight = 120;
+
 void setup() {
-  size(800, 800);
-  pixelDensity(1);
-  textSize(18);
+  fullScreen();
+  orientation(PORTRAIT);
+  
+  textSize(46);
 
   String[] n = {"tab1", "tab2", "tab3", "tab4"};
-  tabs = new Tab(50, n);
+  tabs = new Tab(minHeight, n);
 
   // all controllers
   controllers = new ArrayList();
 
-  Controller c= new Button(150, 250, 100, 50, "/button1");
+  Controller c= new Button(width*0.33, height*.2, width*.33, minHeight, "/button1");
   c.moveTo(0);
   controllers.add(c);
 
-  c = new Toggle(150, 350, 100, 50, "/toggle1");
+  c = new Toggle(width*0.33, height*.4, width*.33, minHeight, "/toggle1");
   c.moveTo(0);
   controllers.add(c);
 
-  c = new NumberField(150, 450, 150, 50, "Ip adress");
+  c = new NumberField(width*0.33, height*.6, width*.33, minHeight, "Ip adress");
   c.moveTo(0);
   controllers.add(c);
 
-  c =new TextLabel(50, 550, "text to give information about something", color(255));
+  c =new TextLabel(width*.1, height*.8, "text to give information about something", color(255));
   c.moveTo(0);
   controllers.add(c);
 
-  c = new HSlider(50, 150, 250, 50, "/hslider1", 0, 127);
+  c = new HSlider(width*0.2, height*.33, width*.6, minHeight, "/hslider1", 0, 127);
   c.moveTo(1);
   controllers.add(c);
 
-  c = new HRadio(350, 150, 300, 50, "/hradio1", 6);
+  c = new HRadio(width*0.2, height*.66, width*.6,minHeight, "/hradio1", 6);
   c.moveTo(1);
   controllers.add(c);
 
-  c = new VSlider(50, 250, 50, 250, "/vslider1", 0, 127);
+  c = new VSlider(width*0.33, height*.33, minHeight, height*.33, "/vslider1", 0, 127);
   c.moveTo(2);
   controllers.add(c);
 
-  c = new VRadio(350, 250, 50, 200, "/vradio1", 4);
+  c = new VRadio(width*0.66, height*.33, minHeight, height*.33, "/vradio1", 12);
   c.moveTo(2);
   controllers.add(c);
 
-  c = new Pad(width*.33, width*.15, width*.33, 200, "/pad1", 0, 127);
+  c = new Pad(width*.2, height*.15, width*.6, height*.33, "/pad1", 0, 127);
   c.moveTo(3);
   controllers.add(c);
   
-  c =new ColorSelector(width*.33, width*.50, 300, 300, "/color1");
+  c =new ColorSelector(width*.2, height*.55, width*.6, height*.33, "/color1");
   c.moveTo(3);
   controllers.add(c);
 }
