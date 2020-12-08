@@ -17,8 +17,8 @@ int patchHeight = 800;
 
 color cBack = #000000; // background
 color cGuiback = #5A5858; // gui background
-color cGuifront = #CECCCE; // gui foreground
-color cActive = #FFEAFC; // when last selected
+color cGuifront = #FF76B0; // gui foreground
+color cActive = #FF76B0; // when last selected
 color cCaption = #FFFFFF; // texts around
 int radioItemsPerRow = 8;
 
