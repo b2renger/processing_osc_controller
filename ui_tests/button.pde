@@ -32,8 +32,7 @@ class Button extends Controller {
       && my> ypos  && my < ypos +h  && mousePressed) {
       pressed = true;
       value = 1;
-      onChange();
-      
+      if (pvalue != value) onChange();
     }else {
       pressed = false;
       value = 0;

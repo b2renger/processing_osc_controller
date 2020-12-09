@@ -13,7 +13,8 @@ color cCaption = #FFFFFF; // texts around
 
 ArrayList<Controller> controllers;
 Tab tabs;
-Button b;
+int index = 0;
+
 void setup() {
   size(800, 800);
   pixelDensity(1);
@@ -28,19 +29,29 @@ void setup() {
   Controller c= new Button(150, 250, 100, 50, "/button1");
   c.moveTo(0);
   controllers.add(c);
-  c.register(new CallBackHandler() {
-    @Override
+  c.register(new CallBackHandler(c) {
+    //@Override
       public void onEvent() {
-      println(controllers.get(controllers.size()-1).label, 
-        controllers.get(controllers.size()-1).value);
+      println(c.label, 
+        c.value);
     }
   }
   );
 
-
+ 
   c = new Toggle(150, 350, 100, 50, "/toggle1");
   c.moveTo(0);
   controllers.add(c);
+  c.register(new CallBackHandler(c) {
+    @Override
+      public void onEvent() {
+      println(c.label, 
+        c.value);
+    }
+  }
+  );
+  
+  
 
   c = new NumberField(150, 450, 150, 50, "Ip adress");
   c.moveTo(0);

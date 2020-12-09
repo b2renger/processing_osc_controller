@@ -18,9 +18,13 @@ class Toggle extends Controller {
     fill(colorBack);
     rect(xpos, ypos, w, h, rounded);
     if (checked) {
+      value = 1;
       fill(colorFront);
       rect(xpos+innerPadding, ypos +innerPadding, w-innerPadding*2, h-innerPadding*2, rounded);
+    } else {
+      value = 0;
     }
+
     fill(255);
     textAlign(CENTER, BOTTOM);
     text(label, xpos + w/2, ypos );
@@ -30,8 +34,13 @@ class Toggle extends Controller {
     if (mousePressed) {
       if (mx > xpos && mx <xpos + w  
         && my> ypos  && my < ypos +h  && change) {
+
         change = false;
         checked = ! checked;
+
+        if (checked) value =1;
+        else value=0;
+        onChange();
       }
     } else {
       change = true;

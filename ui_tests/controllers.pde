@@ -28,9 +28,9 @@ class Controller   {
   }
   
   void onChange(){
-    if (pvalue != value){
+    //if (pvalue != value){
       cbh.onEvent();
-    } 
+    //} 
   };
   
   public void register(CallBackHandler cbh){
@@ -47,7 +47,11 @@ interface CallBack {
 
 
 class CallBackHandler  implements CallBack {  
-  public void onEvent() {
+  Controller c;
+  CallBackHandler (Controller c){
+    this.c = c;
+  }
+  public void onEvent( ) {
     println("I've been called back");
   }
 }
