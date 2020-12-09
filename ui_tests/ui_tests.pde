@@ -13,7 +13,7 @@ color cCaption = #FFFFFF; // texts around
 
 ArrayList<Controller> controllers;
 Tab tabs;
-
+Button b;
 void setup() {
   size(800, 800);
   pixelDensity(1);
@@ -27,6 +27,13 @@ void setup() {
 
   Controller c= new Button(150, 250, 100, 50, "/button1");
   c.moveTo(0);
+  c.register(new CallBackHandler() {
+    @Override
+      public void onEvent() {
+      println("connect button pressed");
+    }
+  }
+  );
   controllers.add(c);
 
   c = new Toggle(150, 350, 100, 50, "/toggle1");
@@ -60,7 +67,7 @@ void setup() {
   c = new Pad(width*.33, width*.15, width*.33, 200, "/pad1", 0, 127);
   c.moveTo(3);
   controllers.add(c);
-  
+
   c =new ColorSelector(width*.33, width*.50, 300, 300, "/color1");
   c.moveTo(3);
   controllers.add(c);
@@ -70,6 +77,8 @@ void setup() {
 void draw() {
 
   background(cBack);
+
+   
 
   tabs.draw();
   tabs.update(mouseX, mouseY);

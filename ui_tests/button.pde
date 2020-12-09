@@ -1,15 +1,17 @@
 
 class Button extends Controller {
-  float w,h;
+  float w, h;
   float rounded = 10;
   float innerPadding = 4;
   boolean pressed = false;
- 
+  
+
 
   Button(float xpos, float ypos, float w, float h, String label) {
     super( xpos, ypos, label);
     this.w = w;
     this.h = h;
+   
   }
 
   void draw() {
@@ -29,8 +31,13 @@ class Button extends Controller {
     if (mx > xpos && mx <xpos + w  
       && my> ypos  && my < ypos +h  && mousePressed) {
       pressed = true;
-    } else {
+      value = 1;
+      onChange();
+      
+    }else {
       pressed = false;
+      value = 0;
     }
+    pvalue = value;
   }
 }
