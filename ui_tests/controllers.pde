@@ -46,8 +46,7 @@ interface CallBack {
 }
 
 
-class CallBackHandler implements CallBack {  
-  @Override
+class CallBackHandler  implements CallBack {  
   public void onEvent() {
     println("I've been called back");
   }

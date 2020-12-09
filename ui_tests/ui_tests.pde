@@ -27,14 +27,16 @@ void setup() {
 
   Controller c= new Button(150, 250, 100, 50, "/button1");
   c.moveTo(0);
+  controllers.add(c);
   c.register(new CallBackHandler() {
     @Override
       public void onEvent() {
-      println("connect button pressed");
+      println(controllers.get(controllers.size()-1).label, 
+        controllers.get(controllers.size()-1).value);
     }
   }
   );
-  controllers.add(c);
+
 
   c = new Toggle(150, 350, 100, 50, "/toggle1");
   c.moveTo(0);
@@ -78,7 +80,7 @@ void draw() {
 
   background(cBack);
 
-   
+
 
   tabs.draw();
   tabs.update(mouseX, mouseY);
