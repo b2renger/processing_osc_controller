@@ -28,9 +28,7 @@ class Controller   {
   }
   
   void onChange(){
-    //if (pvalue != value){
       cbh.onEvent();
-    //} 
   };
   
   public void register(CallBackHandler cbh){

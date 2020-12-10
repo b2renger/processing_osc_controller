@@ -52,6 +52,7 @@ class NumberField extends Controller {
         || c=='5' || c=='6' || c=='7' || c=='8' || c=='9'
         ) {
         content +=c;
+        onChange();
       }
     }
   }
@@ -59,6 +60,7 @@ class NumberField extends Controller {
   void removeLast() {
     if (focus && content.length()>0) {
       content = content.substring(0, content.length()-1);
+      onChange();
     }
   }
 }

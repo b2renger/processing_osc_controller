@@ -30,32 +30,41 @@ void setup() {
   c.moveTo(0);
   controllers.add(c);
   c.register(new CallBackHandler(c) {
-    //@Override
-      public void onEvent() {
+    public void onEvent() {
       println(c.label, 
         c.value);
     }
   }
   );
 
- 
+
   c = new Toggle(150, 350, 100, 50, "/toggle1");
   c.moveTo(0);
   controllers.add(c);
   c.register(new CallBackHandler(c) {
-    @Override
-      public void onEvent() {
+    public void onEvent() {
       println(c.label, 
         c.value);
     }
   }
   );
-  
-  
+
+
 
   c = new NumberField(150, 450, 150, 50, "Ip adress");
   c.moveTo(0);
   controllers.add(c);
+  c.register(new CallBackHandler(c) {
+    public void onEvent() {
+      if (c.getClass().getSimpleName().contains("NumberField")) {
+        NumberField nf = (NumberField) c;
+        println(nf.label, 
+        nf.content);
+      }
+    }
+  }
+  );
+
 
   c =new TextLabel(50, 550, "text to give information about something", color(255));
   c.moveTo(0);
