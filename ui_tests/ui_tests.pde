@@ -29,6 +29,7 @@ void setup() {
   Controller c= new Button(150, 250, 100, 50, "/button1");
   c.moveTo(0);
   controllers.add(c);
+
   c.register(new CallBackHandler(c) {
     public void onEvent() {
       println(c.label, 
@@ -59,7 +60,7 @@ void setup() {
       if (c.getClass().getSimpleName().contains("NumberField")) {
         NumberField nf = (NumberField) c;
         println(nf.label, 
-        nf.content);
+          nf.content);
       }
     }
   }
@@ -70,21 +71,51 @@ void setup() {
   c.moveTo(0);
   controllers.add(c);
 
+
   c = new HSlider(50, 150, 250, 50, "/hslider1", 0, 127);
   c.moveTo(1);
   controllers.add(c);
+  c.register(new CallBackHandler(c) {
+    public void onEvent() {
+      println(c.label, 
+        c.value);
+    }
+  }
+  );
+
 
   c = new HRadio(350, 150, 300, 50, "/hradio1", 6);
   c.moveTo(1);
   controllers.add(c);
+  c.register(new CallBackHandler(c) {
+    public void onEvent() {
+      println(c.label, 
+        c.value);
+    }
+  }
+  );
 
   c = new VSlider(50, 250, 50, 250, "/vslider1", 0, 127);
   c.moveTo(2);
   controllers.add(c);
+  c.register(new CallBackHandler(c) {
+    public void onEvent() {
+      println(c.label, 
+        c.value);
+    }
+  }
+  );
 
   c = new VRadio(350, 250, 50, 200, "/vradio1", 4);
   c.moveTo(2);
   controllers.add(c);
+  c.register(new CallBackHandler(c) {
+    public void onEvent() {
+      println(c.label, 
+        c.value);
+    }
+  }
+  );
 
   c = new Pad(width*.33, width*.15, width*.33, 200, "/pad1", 0, 127);
   c.moveTo(3);

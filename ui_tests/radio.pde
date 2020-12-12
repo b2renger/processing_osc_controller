@@ -6,7 +6,6 @@ class HRadio extends Controller {
   boolean change = true;
   int nElts;
   ArrayList<Toggle> elts;
-  int value = 0;
   float outterPadding = 2;
 
   HRadio(float xpos, float ypos, float w, float h, String label, int nElts) {
@@ -17,8 +16,10 @@ class HRadio extends Controller {
     elts = new ArrayList();
     float eltsSize = (w - outterPadding * nElts)/nElts;
     for (int i = 0; i < nElts; i++) {
-      elts.add(new Toggle(xpos + eltsSize * i + outterPadding*i, ypos, eltsSize, eltsSize, "" ));
-      elts.get(i).rounded = this.rounded;
+      Toggle t = new Toggle(xpos + eltsSize * i + outterPadding*i, ypos, eltsSize, eltsSize, "" );
+      t.rounded = this.rounded;
+      if (i == 0 ) t.checked = true;
+      elts.add(t);
     }
   }
 
@@ -34,7 +35,9 @@ class HRadio extends Controller {
   void update(float mx, float my) {
     for (int i = 0; i < nElts; i++) {
       Toggle t =  elts.get(i);
-      t.update(mx, my);
+      if (t.checked == false) {
+        t.update(mx, my);
+      }
 
       if (t.checked == true  ) {
         value = i;
@@ -43,6 +46,8 @@ class HRadio extends Controller {
         if (value!=j) elts.get(j).checked = false;
       }
     }
+    if (pvalue != value) onChange();
+    pvalue = value;
   }
 }
 
@@ -55,7 +60,6 @@ class VRadio extends Controller {
   boolean change = true;
   int nElts;
   ArrayList<Toggle> elts;
-  int value = 0;
   float outterPadding = 2;
 
   VRadio(float xpos, float ypos, float w, float h, String label, int nElts) {
@@ -66,8 +70,10 @@ class VRadio extends Controller {
     elts = new ArrayList();
     float eltsSize = (h - outterPadding * nElts)/nElts;
     for (int i = 0; i < nElts; i++) {
-      elts.add(new Toggle(xpos, ypos + + eltsSize * i + outterPadding*i, eltsSize, eltsSize, "" ));
-      elts.get(i).rounded = this.rounded;
+      Toggle t = new Toggle(xpos, ypos + + eltsSize * i + outterPadding*i, eltsSize, eltsSize, "" );
+      t.rounded = this.rounded;
+      if (i == 0 ) t.checked = true;
+      elts.add(t);
     }
   }
 
@@ -83,7 +89,9 @@ class VRadio extends Controller {
   void update(float mx, float my) {
     for (int i = 0; i < nElts; i++) {
       Toggle t =  elts.get(i);
-      t.update(mx, my);
+      if (t.checked == false) {
+        t.update(mx, my);
+      }
 
       if (t.checked == true  ) {
         value = i;
@@ -92,5 +100,7 @@ class VRadio extends Controller {
         if (value!=j) elts.get(j).checked = false;
       }
     }
+    if (pvalue != value) onChange();
+    pvalue = value;
   }
 }

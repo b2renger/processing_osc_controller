@@ -42,12 +42,11 @@ class Tab extends Controller {
     for (int i = 0; i < nElts; i++) {
       Toggle t =  elts.get(i);
       t.update(mx, my);
-
       if (t.checked == true  ) {
-        this.value = i;
+       value = i;
       } 
       for (int j = 0; j < nElts; j++) {
-        if (this.value!=j) elts.get(j).checked = false;
+        if (value!=j) elts.get(j).checked = false;
       }
     }
   }

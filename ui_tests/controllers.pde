@@ -16,6 +16,7 @@ class Controller   {
     this.label = label;
     colorBack = cGuiback;
     colorFront = cGuifront;
+    cbh = new CallBackHandler(this);
   }
 
   void draw() {
@@ -50,6 +51,6 @@ class CallBackHandler  implements CallBack {
     this.c = c;
   }
   public void onEvent( ) {
-    println("I've been called back");
+    //println("I've been called back");
   }
 }
