@@ -8,6 +8,8 @@ class Pad extends Controller {
   float min = 0;
   float max = 127;
   float borderTolerance = 10;
+  float px = 0;
+  float py = 0;
 
   Pad(float xpos, float ypos, float w, float h, String label, float min, float max) {
     super( xpos, ypos, label);
@@ -48,5 +50,9 @@ class Pad extends Controller {
       ex = constrain(mx, xpos, xpos +w);
       wy = constrain(my, ypos, ypos+h);
     }
+    
+    if (px != xvalue || py !=yvalue) onChange();
+    px = xvalue;
+    py = yvalue;
   }
 }

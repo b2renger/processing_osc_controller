@@ -120,6 +120,16 @@ void setup() {
   c = new Pad(width*.33, width*.15, width*.33, 200, "/pad1", 0, 127);
   c.moveTo(3);
   controllers.add(c);
+  c.register(new CallBackHandler(c) {
+    public void onEvent() {
+      if (c.getClass().getSimpleName().contains("Pad")) {
+        Pad p = (Pad) c;
+        println(p.label, 
+          p.xvalue, p.yvalue);
+      }
+    }
+  }
+  );
 
   c =new ColorSelector(width*.33, width*.50, 300, 300, "/color1");
   c.moveTo(3);
