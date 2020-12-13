@@ -3,6 +3,7 @@ class ColorSelector extends Controller {
   float w, h;
   float rounded = 10;
   float r = 255, g = 0, b =0;
+  float pr = 0, pg = 0 , pb = 0;
   float borderTolerance = 10;
   boolean radial = true;
   PImage img;
@@ -46,5 +47,10 @@ class ColorSelector extends Controller {
       g = green(c);
       b = blue(c);
     }
+    
+    if (pr != r || pg!=pg || pb !=b) onChange();
+    pr = r;
+    pb = b;
+    pg = g;
   }
 }

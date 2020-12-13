@@ -134,6 +134,16 @@ void setup() {
   c =new ColorSelector(width*.33, width*.50, 300, 300, "/color1");
   c.moveTo(3);
   controllers.add(c);
+  c.register(new CallBackHandler(c) {
+    public void onEvent() {
+      if (c.getClass().getSimpleName().contains("ColorSelector")) {
+        ColorSelector cs = (ColorSelector) c;
+        println(cs.label, 
+          cs.r, cs.g, cs.b);
+      }
+    }
+  }
+  );
 }
 
 
