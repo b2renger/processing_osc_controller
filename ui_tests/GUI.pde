@@ -264,8 +264,8 @@ class NumberField extends Controller {
     }
 
     fill(255);
-    textAlign(LEFT, TOP);
-    text(label, xpos, ypos +h);
+    textAlign(LEFT, BOTTOM);
+    text(label, xpos, ypos);
 
     textAlign(LEFT, CENTER);
     text(content, xpos + innerPadding, ypos +h/2);
