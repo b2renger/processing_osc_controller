@@ -11,6 +11,14 @@ void sendFloatMessage(String addrPattern, float value) {
   oscP5.send(myMessage, myRemoteLocation);
 }
 
+void sendArrayMessage(String addrPattern, float[] array) {
+  OscMessage myMessage = new OscMessage(addrPattern);
+  for (int i = 0; i < array.length; i++) {
+    myMessage.add(array[i]);
+  }
+  oscP5.send(myMessage, myRemoteLocation);
+}
+
 void sendStringMessage(String addrPattern, String value) {
   OscMessage myMessage = new OscMessage(addrPattern);
   myMessage.add(value); 

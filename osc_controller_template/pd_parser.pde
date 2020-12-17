@@ -1,4 +1,4 @@
-void parse_patch(String[] lines, Tab tab) {
+void parse_patch(String[] lines, int tab) {
   for (int i = 0; i < lines.length; i++) {
 
     String[] s = split(lines[i], " ");
@@ -12,27 +12,13 @@ void parse_patch(String[] lines, Tab tab) {
       float w = map(int(s[5]), 0, patchWidth, 0, width);
       float h = map(int(s[6]), 0, patchHeight, 0, height);
 
-      Slider s1 = cp5.addSlider(s[13])
-        .setPosition(int(x), int(y))
-        .setRange(int(s[7]), int(s[8]))
-        .setSize(int(w), int(h))
-        .setFont(font)
-        .setColorBackground(cGuiback)
-        .setColorForeground(cGuifront)
-        .setColorActive(cActive)
-        .setColorCaptionLabel(cCaption)
-        .setColorLabel(cCaption)
-        .setColorValue(cCaption)
-        .moveTo(tab)
-        ;  
-      s1.getCaptionLabel().align(ControlP5.RIGHT, ControlP5.CENTER).setPaddingX(5);
-      s1.addCallback(new CallbackListener() {
-        public void controlEvent(CallbackEvent theEvent) {
-          if (theEvent.getAction()==ControlP5.ACTION_BROADCAST) {
-            Controller c = theEvent.getController();
-            //println(index, c.getLabel(), c.getValue());
-            sendFloatMessage("/"+c.getLabel(), c.getValue());
-          }
+      Controller c = new HSlider(x, y, w, h, s[13], float(s[7]), float(s[8]));
+      c.moveTo(tab);
+      g.addController(c);
+      c.register(new CallBackHandler(c) {
+        public void onEvent() {
+          sendFloatMessage("/"+c.label, c.value);
+          //println(c.label, c.value);
         }
       }
       );
@@ -45,29 +31,13 @@ void parse_patch(String[] lines, Tab tab) {
       float y = map(int(s[3]), 0, patchHeight, 0, height);
       float w = map(int(s[5]), 0, patchWidth, 0, width);
       float h = map(int(s[6]), 0, patchHeight, 0, height);
-
-      Slider s1 = cp5.addSlider(s[13])
-        .setPosition(int(x), int(y))
-        .setRange(int(s[7]), int(s[8]))
-        .setSize(int(w), int(h))
-        .setFont(font)
-        .setColorBackground(cGuiback)
-        .setColorForeground(cGuifront)
-        .setColorActive(cActive)
-        .setColorCaptionLabel(cCaption)
-        .setColorLabel(cCaption)
-        .setColorValue(cCaption)
-        .moveTo(tab)
-        ;  
-      s1.getValueLabel().align(ControlP5.CENTER, ControlP5.TOP_OUTSIDE).setPaddingX(0);
-      s1.getCaptionLabel().align(ControlP5.CENTER, ControlP5.BOTTOM_OUTSIDE);
-      s1.addCallback(new CallbackListener() {
-        public void controlEvent(CallbackEvent theEvent) {
-          if (theEvent.getAction()==ControlP5.ACTION_BROADCAST) {
-            Controller c = theEvent.getController();
-            //println(index, c.getLabel(), c.getValue());
-            sendFloatMessage("/"+c.getLabel(), c.getValue());
-          }
+      Controller c = new VSlider(x, y, w, h, s[13], float(s[7]), float(s[8]));
+      c.moveTo(tab);
+      g.addController(c);
+      c.register(new CallBackHandler(c) {
+        public void onEvent() {
+          sendFloatMessage("/"+c.label, c.value);
+          //println(c.label, c.value);
         }
       }
       );
@@ -81,26 +51,12 @@ void parse_patch(String[] lines, Tab tab) {
       float w = map(int(s[5]), 0, patchWidth, 0, width);
       float h = map(int(s[7]), 0, patchHeight, 0, height);
 
-      Button b = cp5.addButton(s[11])
-        .setPosition(int(x), int(y))
-        .setSize(int(w), int(h))
-        .setFont(font)
-        .setColorBackground(cGuiback)
-        .setColorForeground(cGuifront)
-        .setColorActive(cActive)
-        .setColorCaptionLabel(cCaption)
-        .setColorLabel(cCaption)
-        .setColorValue(cCaption)
-        .moveTo(tab)
-        ;  
-      b.getCaptionLabel().align(ControlP5.CENTER, ControlP5.TOP_OUTSIDE);
-      b.addCallback(new CallbackListener() {
-        public void controlEvent(CallbackEvent theEvent) {
-          if (theEvent.getAction()==ControlP5.ACTION_BROADCAST) {
-            Controller c = theEvent.getController();
-            //println(index, c.getLabel(), c.getValue());
-            sendFloatMessage("/"+c.getLabel(), c.getValue());
-          }
+      Controller c= new Button(x, y, w, h, s[11]);
+      c.moveTo(tab);
+      g.addController(c);
+      c.register(new CallBackHandler(c) {
+        public void onEvent() {
+          sendFloatMessage("/"+c.label, c.value);
         }
       }
       );
@@ -115,27 +71,13 @@ void parse_patch(String[] lines, Tab tab) {
       float w = map(int(s[5]), 0, patchWidth, 0, width);
       float h = map(int(s[5]), 0, patchHeight, 0, height);
 
-      Toggle t = cp5.addToggle(s[9])
-        .setPosition(int(x), int(y))
-        .setSize(int(w), int(h))
-        .setFont(font)
-        .setColorBackground(cGuiback)
-        .setColorForeground(cGuifront)
-        .setColorActive(cActive)
-        .setColorCaptionLabel(cCaption)
-        .setColorLabel(cCaption)
-        .setColorValue(cCaption)
-        //.setMode(ControlP5.SWITCH)
-        .moveTo(tab)
-        ;  
-      t.getCaptionLabel().align(ControlP5.CENTER, ControlP5.TOP_OUTSIDE);
-      t.addCallback(new CallbackListener() {
-        public void controlEvent(CallbackEvent theEvent) {
-          if (theEvent.getAction()==ControlP5.ACTION_BROADCAST) {
-            Controller c = theEvent.getController();
-            //println(index, c.getLabel(), c.getValue());
-            sendFloatMessage("/"+c.getLabel(), c.getValue());
-          }
+      Controller c = new Toggle(x, y, w, h, s[9]);
+      c.moveTo(tab);
+      g.addController(c);
+      c.register(new CallBackHandler(c) {
+        public void onEvent() {
+          sendFloatMessage(c.label, c.value);
+          // println(c.label, c.value);
         }
       }
       );
@@ -149,27 +91,15 @@ void parse_patch(String[] lines, Tab tab) {
       float w = map(int(s[5])*fontSize, 0, patchWidth, 0, width); // pd uses a weird unit as width (eg characterd width)
       float h = map(int(s[6]), 0, patchHeight, 0, height);
 
-      Numberbox n = cp5.addNumberbox(s[13])
-        .setPosition(int(x), int(y))
-        .setSize(int(w), int(h))
-        .setMultiplier(0.1) // set the sensitifity of the numberbox
-        .setDirection(Controller.HORIZONTAL) 
-        .setFont(font)
-        .setColorBackground(cGuiback)
-        .setColorForeground(cGuifront)
-        .setColorActive(cActive)
-        .setColorCaptionLabel(cCaption)
-        .setColorLabel(cCaption)
-        .setColorValue(cCaption)
-        .moveTo(tab)
-        ;  
-      n.getCaptionLabel().align(ControlP5.CENTER, ControlP5.BOTTOM_OUTSIDE);
-      n.addCallback(new CallbackListener() {
-        public void controlEvent(CallbackEvent theEvent) {
-          if (theEvent.getAction()==ControlP5.ACTION_BROADCAST) {
-            Controller c = theEvent.getController();
-            //println(index, c.getLabel(), c.getValue());
-            sendFloatMessage("/"+c.getLabel(), c.getValue());
+      Controller c = new NumberField(x, y, w, h, s[13]);
+      c.moveTo(tab);
+      g.addController(c);
+      c.register(new CallBackHandler(c) {
+        public void onEvent() {
+          if (c.getClass().getSimpleName().contains("NumberField")) {
+            NumberField nf = (NumberField) c;
+            sendFloatMessage(nf.label, float(nf.content));
+            //println(nf.label, nf.content);
           }
         }
       }
@@ -184,25 +114,17 @@ void parse_patch(String[] lines, Tab tab) {
       float y = map(int(s[3]), 0, patchHeight, 0, height);
       float w = map(int(s[6]), 0, patchWidth, 0, width); 
       float h = map(int(s[7]), 0, patchHeight, 0, height);
-      Slider2D s2 = cp5.addSlider2D(s[10])
-        .setPosition(int(x), int(y))
-        .setSize(int(w), int(h))
-        .setFont(font)
-        .setColorBackground(cGuiback)
-        .setColorForeground(cGuifront)
-        .setColorActive(cActive)
-        .setColorCaptionLabel(cCaption)
-        .setColorLabel(cCaption)
-        .setColorValue(cCaption)
-        .moveTo(tab)
-        ;  
-      s2.getCaptionLabel().align(ControlP5.CENTER, ControlP5.BOTTOM_OUTSIDE);
-      s2.addCallback(new CallbackListener() {
-        public void controlEvent(CallbackEvent theEvent) {
-          if (theEvent.getAction()==ControlP5.ACTION_BROADCAST) {
-            Controller c = theEvent.getController();
-            //println(index, c.getLabel(), c.getValue());
-            sendFloatMessage("/"+c.getLabel(), c.getValue());
+
+      Controller c = new Pad(x, y, w, h, s[10], 0, 127);
+      c.moveTo(tab);
+      g.addController(c);
+      c.register(new CallBackHandler(c) {
+        public void onEvent() {
+          if (c.getClass().getSimpleName().contains("Pad")) {
+            Pad p = (Pad) c;
+            float[] a = {p.xvalue, p.yvalue};
+            sendArrayMessage(p.label, a);
+            // println(p.label, p.xvalue, p.yvalue);
           }
         }
       }
@@ -216,24 +138,16 @@ void parse_patch(String[] lines, Tab tab) {
       float y = map(int(s[3]), 0, patchHeight, 0, height);
       float w = map(int(s[6]), 0, patchWidth, 0, width);
       float h = map(int(s[7]), 0, patchHeight, 0, height);
-      ColorWheel c = cp5.addColorWheel(s[10], int(x), int(y), int(h) )
-        .setRGB(color(128, 0, 255))
-        .setSize(int(w), int(h))
-        .setFont(font)
-        .setColorBackground(cGuiback)
-        .setColorForeground(cGuifront)
-        .setColorActive(cActive)
-        .setColorCaptionLabel(cCaption)
-        .setColorLabel(cCaption)
-        .setColorValue(cCaption)
-        .moveTo(tab)
-        ;  
-      c.getCaptionLabel().align(ControlP5.CENTER, ControlP5.BOTTOM_OUTSIDE);
-      c.addCallback(new CallbackListener() {
-        public void controlEvent(CallbackEvent theEvent) {
-          if (theEvent.getAction()==ControlP5.ACTION_BROADCAST) {
-            Controller c = theEvent.getController();        
-            sendColorMessage("/"+c.getLabel(), (color)c.getValue());
+
+      Controller c =new ColorSelector(x, y, w, h, s[10]);
+      c.moveTo(tab);
+      g.addController(c);
+      c.register(new CallBackHandler(c) {
+        public void onEvent() {
+          if (c.getClass().getSimpleName().contains("ColorSelector")) {
+            ColorSelector cs = (ColorSelector) c;
+            sendColorMessage(cs.label, color(cs.r, cs.g, cs.b));
+            //println(cs.label, cs.r, cs.g, cs.b);
           }
         }
       }
@@ -253,19 +167,10 @@ void parse_patch(String[] lines, Tab tab) {
         }
         t += s[j] + " " ;
       }
-      cp5.addTextlabel(s[4])
-        .setText(t)
-        .setColorValue(0xffffff00)
-        .setPosition(int(x), int(y))
-        .setFont(font)
-        .setColorBackground(cGuiback)
-        .setColorForeground(cGuifront)
-        .setColorActive(cActive)
-        .setColorCaptionLabel(cCaption)
-        .setColorLabel(cCaption)
-        .setColorValue(cCaption)
-        .moveTo(tab)
-        ;
+
+      Controller c =new TextLabel(x, y, t, cCaption);
+      c.moveTo(tab);
+      g.addController(c);
     }
 
 
@@ -277,40 +182,19 @@ void parse_patch(String[] lines, Tab tab) {
       float w = map(int(s[5]), 0, patchWidth, 0, width);
       float h = map(int(s[5]), 0, patchHeight, 0, height);
 
-      RadioButton r = cp5.addRadioButton(s[11])
-        .setPosition(int(x), int(y))
-        .setSize(int(w), int(h))
-        .setFont(font)
-        .setColorBackground(cGuiback)
-        .setColorForeground(cGuifront)
-        .setColorActive(cActive)
-        .setColorLabel(cCaption)
-        .setColorValue(cCaption)
-        .setItemsPerRow(radioItemsPerRow)
-        .setSpacingColumn(1)
-        .moveTo(tab)
-        ;  
-
-      for (int j = 0; j < int(s[8]); j++) {
-        r.addItem(s[11]+"-"+j, j);
-      }
-
-      for (Toggle t : r.getItems()) {
-        //t.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
-        t.getCaptionLabel().hide();
-        t.addListener(new ControlListener() {
-          public void controlEvent(ControlEvent theEvent) {
-            Controller c = theEvent.getController();
-            String[] msg = c.getLabel().split("-");
-            println("/"+ msg[0] + "/" + msg[1]);
-            sendFloatMessage("/"+ msg[0] + "/" + msg[1], c.getValue());
-          }
+      Controller c = new HRadio(x, y, w*int(s[8]), h, s[11], int(s[8]));
+      c.moveTo(tab);
+      g.addController(c);
+      c.register(new CallBackHandler(c) {
+        public void onEvent() {
+          sendFloatMessage(c.label, c.value);
+          //println(c.label, c.value);
         }
-        );
       }
+      );
     }
-    
-    
+
+
     ///////////////////////////////////////////////////////////////////
     // check for horizontal radio button
     if (s.length>10 && s[1].contains("obj") && s[4].contains("vradio")) {
@@ -319,37 +203,16 @@ void parse_patch(String[] lines, Tab tab) {
       float w = map(int(s[5]), 0, patchWidth, 0, width);
       float h = map(int(s[5]), 0, patchHeight, 0, height);
 
-      RadioButton r = cp5.addRadioButton(s[11])
-        .setPosition(int(x), int(y))
-        .setSize(int(w), int(h))
-        .setFont(font)
-        .setColorBackground(cGuiback)
-        .setColorForeground(cGuifront)
-        .setColorActive(cActive)
-        .setColorLabel(cCaption)
-        .setColorValue(cCaption)
-        .setItemsPerRow(1)
-        .setSpacingColumn(1)
-        .moveTo(tab)
-        ;  
-
-      for (int j = 0; j < int(s[8]); j++) {
-        r.addItem(s[11]+"-"+j, j);
-      }
-
-      for (Toggle t : r.getItems()) {
-        //t.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
-        t.getCaptionLabel().hide();
-        t.addListener(new ControlListener() {
-          public void controlEvent(ControlEvent theEvent) {
-            Controller c = theEvent.getController();
-            String[] msg = c.getLabel().split("-");
-            println("/"+ msg[0] + "/" + msg[1]);
-            sendFloatMessage("/"+ msg[0] + "/" + msg[1], c.getValue());
-          }
+      Controller c = new VRadio(x,y, w, h*int(s[8]),s[11],int(s[8]));
+      c.moveTo(tab);
+      g.addController(c);
+      c.register(new CallBackHandler(c) {
+        public void onEvent() {
+          sendFloatMessage(c.label, c.value);
+          //println(c.label, c.value);
         }
-        );
       }
+      );
     }
   }
 }

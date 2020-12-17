@@ -1,61 +1,63 @@
-Textfield iptext;
-Textfield porttext;
+//Textfield iptext;
+//Textfield porttext;
 
 void create_settings() {
-  iptext= cp5.addTextfield("ip")
-    .setPosition(width*0.10, height*0.25)
-    .setSize(int((width) *0.80 ), 80)
-    .setFont(font)
-    //.setFocus(true)
-    .setColorBackground(cGuiback)
-    .setColorForeground(cGuifront)
-    .setColorActive(cActive)
-    .setColorCaptionLabel(cCaption)
-    .setColorLabel(cCaption)
-    .setColorValue(cCaption)
-    .setAutoClear(false).moveTo("default");
-  iptext.getCaptionLabel().align(ControlP5.RIGHT, ControlP5.CENTER).setPaddingX(5)
-    ;
 
-  porttext = cp5.addTextfield("port")
-    .setPosition(width*0.1, height*0.5)
-    .setSize(int(width  *0.80 ), 80)
-    .setFont(font)
-    //.setFocus(true)
-    .setColorBackground(cGuiback)
-    .setColorForeground(cGuifront)
-    .setColorActive(cActive)
-    .setColorCaptionLabel(cCaption)
-    .setColorLabel(cCaption)
-    .setColorValue(cCaption)
-    .setAutoClear(false).moveTo("default");
-  porttext.getCaptionLabel().align(ControlP5.RIGHT, ControlP5.CENTER).setPaddingX(5)
-    ;
 
-  cp5.addBang("CONNECT")
-    .setPosition(width*0.33, height*0.75)
-    .setSize(int(width*0.33 ), 80)
-    .setColorBackground(cGuiback)
-    .setColorForeground(cGuifront)
-    .setColorActive(cActive)
-    .setColorCaptionLabel(cCaption)
-    .setColorLabel(cCaption)
-    .setColorValue(cCaption)
-    .setFont(font).moveTo("default")
-    .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER)
-    ;
+  Controller c = new NumberField(width*0.25, height*.25, width*.5, eltHeight, "Ip adress");
+  c.moveTo(0);
+  g.addController(c);
+  c.register(new CallBackHandler(c) {
+    public void onEvent() {
+      if (c.getClass().getSimpleName().contains("NumberField")) {
+        NumberField nf = (NumberField) c;
+        ip = nf.content;
+        //println(nf.label, nf.content);
+      }
+    }
+  }
+  );
+
+
+  c = new NumberField(width*0.25, height*.5, width*.5, eltHeight, "Port number");
+  c.moveTo(0);
+  g.addController(c);
+  c.register(new CallBackHandler(c) {
+    public void onEvent() {
+      if (c.getClass().getSimpleName().contains("NumberField")) {
+        NumberField nf = (NumberField) c;
+        port = int(nf.content);
+        //println(nf.label, nf.content);
+      }
+    }
+  }
+  );
+
+
+  c= new Button(width*0.25, height*.75, width*.5, eltHeight, "Connect");
+  c.moveTo(0);
+  g.addController(c);
+  c.register(new CallBackHandler(c) {
+    public void onEvent() {
+      myRemoteLocation = new NetAddress(ip, port);
+      println(ip, port, "connecting to new remote location ...");
+      //println(c.label, c.value);
+    }
+  }
+  );
 }
 
 // callbacks
+/*
 public void ip(String _ip) {
-  ip =_ip;
-}
-
-public void port(String _port) {
-  port =int(_port);
-}
-
-public void CONNECT() {
-  myRemoteLocation = new NetAddress(ip, port);
-  println(ip, port, "connecting to new remote location ...");
-}
+ ip =_ip;
+ }
+ 
+ public void port(String _port) {
+ port =int(_port);
+ }
+ 
+ public void CONNECT() {
+ myRemoteLocation = new NetAddress(ip, port);
+ println(ip, port, "connecting to new remote location ...");
+ }*/
