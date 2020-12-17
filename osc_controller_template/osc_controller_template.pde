@@ -9,7 +9,7 @@ NetAddress myRemoteLocation;
 String ip = "127.0.0.1";
 int port = 9000;
 
-String[] pages = {"Settings", "test", "hslider_layout"}; // name of the pd patch to use as layout
+String[] pages = {"Settings", "test"}; // name of the pd patch to use as layout
 PFont font ;
 int patchWidth = 600;
 int patchHeight = 800;
@@ -31,7 +31,7 @@ void setup() {
   font = createFont("arial", fontSize);
 
 
-  oscP5 = new OscP5(this, 12000);
+  oscP5 = new OscP5(this, 12001);
   myRemoteLocation = new NetAddress(ip, port);
 
   g = new GUI(50, pages);

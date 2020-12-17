@@ -76,7 +76,7 @@ void parse_patch(String[] lines, int tab) {
       g.addController(c);
       c.register(new CallBackHandler(c) {
         public void onEvent() {
-          sendFloatMessage(c.label, c.value);
+          sendFloatMessage("/"+ c.label, c.value);
           // println(c.label, c.value);
         }
       }
@@ -98,7 +98,7 @@ void parse_patch(String[] lines, int tab) {
         public void onEvent() {
           if (c.getClass().getSimpleName().contains("NumberField")) {
             NumberField nf = (NumberField) c;
-            sendFloatMessage(nf.label, float(nf.content));
+            sendFloatMessage("/" + nf.label, float(nf.content));
             //println(nf.label, nf.content);
           }
         }
@@ -123,7 +123,7 @@ void parse_patch(String[] lines, int tab) {
           if (c.getClass().getSimpleName().contains("Pad")) {
             Pad p = (Pad) c;
             float[] a = {p.xvalue, p.yvalue};
-            sendArrayMessage(p.label, a);
+            sendArrayMessage("/"+p.label, a);
             // println(p.label, p.xvalue, p.yvalue);
           }
         }
@@ -146,7 +146,7 @@ void parse_patch(String[] lines, int tab) {
         public void onEvent() {
           if (c.getClass().getSimpleName().contains("ColorSelector")) {
             ColorSelector cs = (ColorSelector) c;
-            sendColorMessage(cs.label, color(cs.r, cs.g, cs.b));
+            sendColorMessage("/" + cs.label, color(cs.r, cs.g, cs.b));
             //println(cs.label, cs.r, cs.g, cs.b);
           }
         }
@@ -187,7 +187,7 @@ void parse_patch(String[] lines, int tab) {
       g.addController(c);
       c.register(new CallBackHandler(c) {
         public void onEvent() {
-          sendFloatMessage(c.label, c.value);
+          sendFloatMessage("/" + c.label, c.value);
           //println(c.label, c.value);
         }
       }
@@ -208,7 +208,7 @@ void parse_patch(String[] lines, int tab) {
       g.addController(c);
       c.register(new CallBackHandler(c) {
         public void onEvent() {
-          sendFloatMessage(c.label, c.value);
+          sendFloatMessage("/" + c.label, c.value);
           //println(c.label, c.value);
         }
       }
