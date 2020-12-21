@@ -29,7 +29,7 @@ void setup() {
   /* start oscP5, listening for incoming messages at port 12000
    port needs to match the one you are sending to !
    */
-  oscP5 = new OscP5(this, 12000);
+  oscP5 = new OscP5(this, 1234);
 
   c = color(255, 0, 0);
   xpos = width*.5;
