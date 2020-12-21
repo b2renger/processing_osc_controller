@@ -88,7 +88,7 @@ void parse_patch(String[] lines, int tab) {
     if (s.length>10 && s[1].contains("obj") && s[4].contains("nbx")) {
       float x = map(int(s[2]), 0, patchWidth, 0, width);
       float y = map(int(s[3]), 0, patchHeight, 0, height);
-      float w = map(int(s[5]), 0, patchWidth, 0, width); // pd uses a weird unit as width (eg characterd width)
+      float w = map(int(s[5])*fontSize*0.5, 0, patchWidth, 0, width); // pd uses a weird unit as width (eg characterd width)
       float h = map(int(s[6]), 0, patchHeight, 0, height);
 
       Controller c = new NumberField(x, y, w, h, s[13]);
