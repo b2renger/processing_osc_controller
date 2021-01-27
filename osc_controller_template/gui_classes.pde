@@ -17,6 +17,13 @@ class GUI {
   GUI(float minHeight, String[] tabsNames) { 
     controllers = new ArrayList();
     tabs = new Tab(minHeight, tabsNames);
+    tabs.register(new CallBackHandler(tabs) {
+        public void onEvent() {
+          sendFloatMessage("/tabs", tabs.value);
+          //println(c.label, c.value);
+        }
+      }
+      );
     tabbed = true;
   }
 
@@ -137,14 +144,14 @@ class CallBackHandler  implements CallBack {
 
 /*
 Components
-*/
+ */
 
 class Button extends Controller {
   float w, h;
   float rounded = 10;
   float innerPadding = 4;
   boolean pressed = false;
-  
+
   Button(float xpos, float ypos, float w, float h, String label) {
     super( xpos, ypos, label);
     this.w = w;
@@ -170,7 +177,7 @@ class Button extends Controller {
       pressed = true;
       value = 1;
       if (pvalue != value) onChange();
-    }else {
+    } else {
       pressed = false;
       value = 0;
     }
@@ -184,7 +191,7 @@ class ColorSelector extends Controller {
   float w, h;
   float rounded = 10;
   float r = 255, g = 0, b =0;
-  float pr = 0, pg = 0 , pb = 0;
+  float pr = 0, pg = 0, pb = 0;
   float borderTolerance = 10;
   boolean radial = true;
   PImage img;
@@ -356,7 +363,7 @@ class Pad extends Controller {
       ex = constrain(mx, xpos, xpos +w);
       wy = constrain(my, ypos, ypos+h);
     }
-    
+
     if (px != xvalue || py !=yvalue) onChange();
     px = xvalue;
     py = yvalue;
@@ -506,7 +513,7 @@ class HSlider extends Controller {
     textAlign(LEFT, BOTTOM);
     text(label, xpos, ypos);
     textAlign(RIGHT, BOTTOM);
-    text(nf(value, 0,2), xpos + w, ypos);
+    text(nf(value, 0, 2), xpos + w, ypos);
   }
 
   void update(float mx, float my) {
@@ -611,14 +618,19 @@ class Tab extends Controller {
   void update(float mx, float my) {
     for (int i = 0; i < nElts; i++) {
       Toggle t =  elts.get(i);
-      t.update(mx, my);
+      if (t.checked == false) {
+        t.update(mx, my);
+      }
+
       if (t.checked == true  ) {
-       value = i;
+        value = i;
       } 
       for (int j = 0; j < nElts; j++) {
         if (value!=j) elts.get(j).checked = false;
       }
     }
+    if (pvalue != value) onChange();
+    pvalue = value;
   }
 }
 
@@ -631,14 +643,14 @@ class TextLabel extends Controller {
   color c;
 
   TextLabel(float xpos, float ypos, String label, color c) {
-    super(xpos,ypos,label);
-    this.c = c;  
+    super(xpos, ypos, label);
+    this.c = c;
   }
 
   void draw() {
     fill(this.c);
     textAlign(LEFT, TOP);
-    text(this.label, this.xpos,this.ypos);
+    text(this.label, this.xpos, this.ypos);
   }
   void update(float mx, float my) {
   }

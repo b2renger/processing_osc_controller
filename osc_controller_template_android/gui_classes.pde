@@ -17,6 +17,13 @@ class GUI {
   GUI(float minHeight, String[] tabsNames) { 
     controllers = new ArrayList();
     tabs = new Tab(minHeight, tabsNames);
+    tabs.register(new CallBackHandler(tabs) {
+      public void onEvent() {
+        sendFloatMessage("/tabs", tabs.value);
+        //println(c.label, c.value);
+      }
+    }
+    );
     tabbed = true;
   }
 
@@ -615,7 +622,10 @@ class Tab extends Controller {
   void update(float mx, float my) {
     for (int i = 0; i < nElts; i++) {
       Toggle t =  elts.get(i);
-      t.update(mx, my);
+      if (t.checked == false) {
+        t.update(mx, my);
+      }
+
       if (t.checked == true  ) {
         value = i;
       } 
@@ -623,6 +633,8 @@ class Tab extends Controller {
         if (value!=j) elts.get(j).checked = false;
       }
     }
+    if (pvalue != value) onChange();
+    pvalue = value;
   }
 }
 
