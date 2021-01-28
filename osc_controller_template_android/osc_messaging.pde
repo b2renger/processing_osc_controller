@@ -1,3 +1,7 @@
+/* 
+basic functions to send data over osc, depending on the type of data
+*/
+
 
 void sendIntMessage(String addrPattern, int value) {
   OscMessage myMessage = new OscMessage(addrPattern);

@@ -1,5 +1,5 @@
 /*
-class for top level interaction :
+classes for top level interaction :
  - lists all controllers and tabs and call their dedicated functions
  - Overloaded constructor for tabs or no tabs option
  */
@@ -43,6 +43,8 @@ class GUI {
           c.draw();
           c.update(mouseX, mouseY);
         }
+
+        
       }
     } else {
       for (int i = 0; i < controllers.size(); i++) {

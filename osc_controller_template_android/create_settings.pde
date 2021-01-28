@@ -1,9 +1,15 @@
-//Textfield iptext;
-//Textfield porttext;
+
+/*
+create the main tab with number fields for 
+- ip
+- port
+
+and connect button
+
+those elements will be located on tab 0
+*/
 
 void create_settings() {
-
-
   Controller c = new NumberField(width*0.25, height*.25, width*.5, eltHeight, "Ip adress");
   c.moveTo(0);
   g.addController(c);
@@ -46,18 +52,3 @@ void create_settings() {
   }
   );
 }
-
-// callbacks
-/*
-public void ip(String _ip) {
- ip =_ip;
- }
- 
- public void port(String _port) {
- port =int(_port);
- }
- 
- public void CONNECT() {
- myRemoteLocation = new NetAddress(ip, port);
- println(ip, port, "connecting to new remote location ...");
- }*/

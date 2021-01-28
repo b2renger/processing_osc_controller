@@ -1,3 +1,11 @@
+/* 
+this is a big function that takes an array of line (from a pd patch)
+and looks up for gui element
+if it finds something it knows it will create a gui element and register a callback
+function to send osc data using the name of the element as the address pattern followed
+by the data
+*/
+
 void parse_patch(String[] lines, int tab) {
   for (int i = 0; i < lines.length; i++) {
 
