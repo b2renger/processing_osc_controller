@@ -1,4 +1,12 @@
 /*
+ * 
+ * TODO
+ * - when receive a message /identify
+ * - broadcast : name / ip and port
+ */
+
+
+/*
    install OSC from https://github.com/CNMAT/OSC
    install WiFiManager from https://github.com/tzapu/WiFiManager
    install neopixel lib from adafruit 
@@ -23,6 +31,7 @@
 const unsigned int outPort = 12000;          // remote port (not needed for receive)
 const unsigned int localPort = 10000;        // local port to listen for UDP packets (here's where we send the packets)
 IPAddress outIp;
+IPAddress broadIp;
 WiFiUDP Udp;
 char *espname = "esp8266_01";
 
@@ -49,7 +58,7 @@ void setup() {
   // init the lights at startup
   pixels.begin();
   for (int i = 0; i < NUMPIXELS; i++) { // For each pixel...
-    pixels.setPixelColor(i, pixels.Color(255, 0, 255));
+    pixels.setPixelColor(i, pixels.Color(10, 10, 10));
   }
   pixels.show();
 
@@ -91,9 +100,30 @@ void loop() {
       bundle.fill(Udp.read());
     }
     bundle.dispatch("/color1", colorCB);
+    bundle.dispatch("/id", broadcast_id);
   }
 
 
+}
+
+void broadcast_id(OSCMessage &msg1){
+   // sending a message broadcasted to all the network to give name ip and port
+  // construct a message telling ready / name of the device / ip
+  Serial.println("message received");
+  OSCMessage msg("/ready");  //announcement
+  msg.add(espname);
+  msg.add(int(outIp[0]));
+  msg.add(int(outIp[1]));
+  msg.add(int(outIp[2]));
+  msg.add(int(outIp[3]));
+  msg.add(outPort);
+  outIp[3] = 255;  // broadcast it to every device on the netwok IP x.x.x.255
+  //send the message
+  Udp.beginPacket(outIp, outPort);
+  msg.send(Udp);
+  Udp.endPacket();
+  yield();
+  msg.empty();
 }
 
 void broadcast_identity(){
@@ -106,9 +136,8 @@ void broadcast_identity(){
   msg.add(int(outIp[2]));
   msg.add(int(outIp[3]));
   msg.add(outPort);
-  outIp[3] = 255;  // broadcast it to every device on the netwok IP x.x.x.255
   //send the message
-  Udp.beginPacket(outIp, outPort);
+  Udp.beginPacket(broadIp, outPort);
   msg.send(Udp);
   Udp.endPacket();
   yield();
@@ -138,6 +167,8 @@ void init_wifi() {
   Serial.println("connected...yeah ! :)");
   //MDNS.begin(espname);  //make .local work
   outIp = WiFi.localIP();
+  broadIp = WiFi.localIP();
+  broadIp[3] = 255;// broadcast it to every device on the netwok IP x.x.x.255
   Udp.begin(localPort);
 
 }
