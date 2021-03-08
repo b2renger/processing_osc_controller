@@ -3,6 +3,18 @@ import oscP5.*;
 import netP5.*;
 import ketai.sensors.*;
 
+OscP5 oscP5;
+NetAddress myRemoteLocation;
+
+
+String ip = "127.0.0.1";
+int inPort = 12000;
+int outPort = 10000;
+
+boolean AUTO_DISCOVERY = true;
+ArrayList<Client> available_clients;
+int selected_client = -1;
+
 // Change the following line to add your controllers
 String[] pages = {"Settings", "Sensors", "test"}; // name of the pd patch to use as layout
 
@@ -17,11 +29,6 @@ int eltHeight = 100;
 // end of custom stuff
 
 GUI g;
-OscP5 oscP5;
-NetAddress myRemoteLocation;
-String ip = "127.0.0.1";
-int port = 9000;
-
 int patchWidth = 600;
 int patchHeight = 800;
 
@@ -36,7 +43,7 @@ void setup() {
 
 
   oscP5 = new OscP5(this, 12001);
-  myRemoteLocation = new NetAddress(ip, port);
+  myRemoteLocation = new NetAddress(ip, inPort);
 
   g = new GUI(eltHeight, pages);
 
@@ -55,6 +62,8 @@ void setup() {
 void draw() {
   background(cBack);
   g.updateControllers();
+
+  if (AUTO_DISCOVERY) auto_discovery();
 
   if (g.tabs.value == 1) {
     stroke(cGuifront);
