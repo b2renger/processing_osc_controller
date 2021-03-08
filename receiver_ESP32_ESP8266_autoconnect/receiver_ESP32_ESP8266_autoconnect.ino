@@ -1,10 +1,3 @@
-/*
- * 
- * TODO
- * - when receive a message /identify
- * - broadcast : name / ip and port
- */
-
 
 /*
    install OSC from https://github.com/CNMAT/OSC
@@ -94,7 +87,6 @@ void loop() {
   OSCBundle bundle;
   int size = Udp.parsePacket();
   if (size > 0) {
-    Serial.println("yeas");
     while (size--) {
       //yield();
       bundle.fill(Udp.read());
@@ -109,7 +101,7 @@ void loop() {
 void broadcast_id(OSCMessage &msg1){
    // sending a message broadcasted to all the network to give name ip and port
   // construct a message telling ready / name of the device / ip
-  Serial.println("message received");
+  Serial.println("id message received");
   OSCMessage msg("/ready");  //announcement
   msg.add(espname);
   msg.add(int(outIp[0]));
