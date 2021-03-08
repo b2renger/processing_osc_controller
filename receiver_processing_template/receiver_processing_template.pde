@@ -8,6 +8,10 @@ import netP5.*;
 
 OscP5 oscP5;
 
+String sketchName = "processing_test";
+int inPort = 10000;
+int outPort = 12000;
+
 color c; // being get from color1
 float xpos; // being get from hslider1
 float ypos; // being get from vslider1
@@ -26,10 +30,10 @@ float n = 3.145;
 void setup() {
   size(400, 400);
   frameRate(25);
-  /* start oscP5, listening for incoming messages at port 12000
+  /* start oscP5, listening for incoming messages at port inPort
    port needs to match the one you are sending to !
    */
-  oscP5 = new OscP5(this, 1234);
+  oscP5 = new OscP5(this, inPort);
 
   c = color(255, 0, 0);
   xpos = width*.5;
@@ -47,9 +51,9 @@ void draw() {
   stroke(strokeColor);
   fill(c);
   ellipse(xpos, ypos, w, h);
-  
+
   textAlign(CENTER, BOTTOM);
-  text("sponsored by the number : " + n , width*.5, height); 
+  text("sponsored by the number : " + n, width*.5, height);
 }
 
 
@@ -59,9 +63,27 @@ Parsing occurs here !
  */
 void oscEvent(OscMessage theOscMessage) {
   /* check if theOscMessage has the address pattern we are looking for. */
-  
+  //print("### received an osc message.");
+
+  // this first one is for auto-identification - it shouldn't have to be edited
+  if (theOscMessage.checkAddrPattern("/id")==true) { 
+    println("id requested");
+    OscMessage myMessage = new OscMessage("/ready");
+    myMessage.add(sketchName); 
+    myMessage.add("/" + oscP5.ip()); 
+    myMessage.add(inPort); 
+    String []  ips = split( oscP5.ip(), '.'); // get the ip address pattern on this network
+    String broad_IP = ips[0] +"."+ ips[1]+"." + ips[2]+"." + str(255); // replace last by 255 for broadcast
+    // send a broadcasted message
+    NetAddress map = new NetAddress(broad_IP, outPort);
+    oscP5.send(myMessage, map);
+    return;
+  }  
+
+  // below this lines are each controllers
   /*get values from the button input*/
   if (theOscMessage.checkAddrPattern("/bouton1")==true) { 
+    
     backColor = color(random(255), random(255), random(255));
     return;
   }  
@@ -87,30 +109,26 @@ void oscEvent(OscMessage theOscMessage) {
     ypos = map(y, 127, 0, 0, height);
     return;
   }  
-  
-   /*get values from the hradio input*/
+
+  /*get values from the hradio input*/
   if (theOscMessage.checkAddrPattern("/hradio1")==true) { 
     float v = theOscMessage.get(0).floatValue();
     sw = v*2;
     return;
   }  
-  
-   /*get values from the vradio input*/
+
+  /*get values from the vradio input*/
   if (theOscMessage.checkAddrPattern("/vradio1")==true) { 
     float v = theOscMessage.get(0).floatValue();
-    if (v == 0){
+    if (v == 0) {
       strokeColor = color(255, 0, 0);
-    }
-    else if (v == 1){
+    } else if (v == 1) {
       strokeColor = color(255, 255, 0);
-    }
-    else if (v == 2){
+    } else if (v == 2) {
       strokeColor = color(255, 255, 255);
-    }
-    else if (v == 3){
+    } else if (v == 3) {
       strokeColor = color(255, 0, 255);
-    }
-    else if (v == 4){
+    } else if (v == 4) {
       strokeColor = color(0, 0, 255);
     }
     return;
@@ -131,7 +149,7 @@ void oscEvent(OscMessage theOscMessage) {
     c = color(red, green, blue);
     return;
   }  
-  
+
   /*get values from the number input*/
   if (theOscMessage.checkAddrPattern("/number1")==true) { 
     n = theOscMessage.get(0).floatValue();
