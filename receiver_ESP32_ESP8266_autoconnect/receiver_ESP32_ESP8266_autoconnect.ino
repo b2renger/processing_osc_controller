@@ -1,17 +1,19 @@
 
 /*
-   install OSC from https://github.com/CNMAT/OSC
-   install WiFiManager from https://github.com/tzapu/WiFiManager
-   install neopixel lib from adafruit 
+ * based on : https://fredrikolofsson.com/f0blog/f0dmx/
+ * install OSC from https://github.com/CNMAT/OSC
+ * install WiFiManager from https://github.com/tzapu/WiFiManager
+ * install neopixel lib from adafruit 
 */
 
 // led stuff
 #include <Adafruit_NeoPixel.h>
 // wifi stuff
-#include <ESP8266WiFi.h>
+// uncomment the 3 lines below if you are working with an esp8266
+//#include <ESP8266WiFi.h>
+//#include <ESP8266WebServer.h>
+//#include <ESP8266mDNS.h>
 #include <DNSServer.h>
-#include <ESP8266WebServer.h>
-#include <ESP8266mDNS.h>
 #include <WiFiManager.h>
 #include <Ticker.h>
 // for OSC messaging
@@ -26,7 +28,7 @@ const unsigned int localPort = 10000;        // local port to listen for UDP pac
 IPAddress outIp;
 IPAddress broadIp;
 WiFiUDP Udp;
-char *espname = "esp8266_01";
+char *espname = "esp32_01";
 
 // neopixel variables
 #define PIN        14
@@ -139,8 +141,8 @@ void broadcast_identity(){
 void init_wifi() {
 
   WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
-  WiFi.hostname(espname);
-  wifi_station_set_hostname(espname);
+//  WiFi.hostname(espname);
+//  wifi_station_set_hostname(espname);
   //WiFiManager
   WiFiManager wm;
   // wm.resetSettings();//reset settings - for testing
