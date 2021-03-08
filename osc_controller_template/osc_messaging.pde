@@ -35,9 +35,39 @@ void sendColorMessage(String addrPattern, color c) {
 }
 
 
+// receiveing responses from the scan and store them in the available_clients arraylist
 void oscEvent(OscMessage theOscMessage) {
   /* print the address pattern and the typetag of the received OscMessage */
-  print("### received an osc message.");
-  print(" addrpattern: "+theOscMessage.addrPattern());
-  println(" typetag: "+theOscMessage.typetag());
+  //print("### received an osc message.");
+  //print(" addrpattern: "+theOscMessage.addrPattern());
+  //println(" typetag: "+theOscMessage.typetag());
+  
+  if (theOscMessage.checkAddrPattern("/ready")==true) {
+    
+    String name = theOscMessage.get(0).stringValue();
+    String ip = theOscMessage.toString().split(" ")[0].split(":")[0].split("/")[1];
+    String port = theOscMessage.toString().split(" ")[0].split(":")[1];
+    println(name, ip, port);
+    Client client = new Client(name, ip, port);
+    available_clients.add(client);
+    
+    println("available clients number : " + available_clients.size());
+    
+    
+  }
+}
+
+// data holder for available clients 
+class Client{
+  String name;
+  String ip; 
+  String port;
+  
+  Client(String name, String ip, String port){
+    this.name = name;
+    this.ip = ip;
+    this.port = port;
+  }
+  
+  
 }
