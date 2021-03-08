@@ -1,5 +1,3 @@
-//Textfield iptext;
-//Textfield porttext;
 
 void create_settings() {
 
@@ -27,7 +25,7 @@ void create_settings() {
       public void onEvent() {
         if (c.getClass().getSimpleName().contains("NumberField")) {
           NumberField nf = (NumberField) c;
-          port = int(nf.content);
+          outPort = int(nf.content);
           //println(nf.label, nf.content);
         }
       }
@@ -39,8 +37,8 @@ void create_settings() {
     c.register(new CallBackHandler(c) {
       public void onEvent() {
 
-        myRemoteLocation = new NetAddress(ip, port);
-        println(ip, port, "connecting to new remote location ...");
+        myRemoteLocation = new NetAddress(ip, outPort);
+        println(ip, outPort, "connecting to new remote location ...");
         //println(c.label, c.value);
       }
     }
@@ -59,7 +57,7 @@ void create_settings() {
         String []  ips = split( oscP5.ip(), '.'); // get the ip address pattern on this network
         String broad_IP = ips[0] +"."+ ips[1]+"." + ips[2]+"." + str(255); // replace last by 255 for broadcast
         // send a broadcasted message
-        NetAddress map = new NetAddress(broad_IP, port);
+        NetAddress map = new NetAddress(broad_IP, outPort);
         OscMessage myMessage = new OscMessage("/id");
         myMessage.add(random(1122)); 
         oscP5.send(myMessage, map);
@@ -98,8 +96,8 @@ void create_settings() {
     c.register(new CallBackHandler(c) {
       public void onEvent() {
 
-        myRemoteLocation = new NetAddress(ip, port);
-        println(ip, port, "connecting to new remote location ...");
+        myRemoteLocation = new NetAddress(ip, outPort);
+        println(ip, outPort, "connecting to new remote location ...");
         //println(c.label, c.value);
       }
     }

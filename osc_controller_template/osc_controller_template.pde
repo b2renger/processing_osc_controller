@@ -14,7 +14,8 @@ OscP5 oscP5;
 NetAddress myRemoteLocation;
 
 String ip = "127.0.0.1";
-int port = 10000;
+int inPort = 12000;
+int outPort = 10000;
 
 boolean AUTO_DISCOVERY = true;
 ArrayList<Client> available_clients;
@@ -42,8 +43,8 @@ void setup() {
   font = createFont("arial", fontSize);
 
 
-  oscP5 = new OscP5(this, 12000);
-  myRemoteLocation = new NetAddress(ip, port);
+  oscP5 = new OscP5(this, inPort);
+  myRemoteLocation = new NetAddress(ip, outPort);
 
 
 
@@ -65,26 +66,8 @@ void setup() {
 void draw() {
   background(cBack);
   g.updateControllers();
+  if (AUTO_DISCOVERY) auto_discovery();
 
-  for (int i = 0; i < g.controllers.size(); i++) {
-    Controller c = g.controllers.get(i);
-    if (g.tabs.value == 0) {
-      textSize(fontSize);
-      textAlign(CENTER, CENTER);
-      text("there is " + available_clients.size() + " client(s) available", width*0.5, height*0.4);
-      if (selected_client == -1 || available_clients.size() < 1 ){
-        text("no client selected", width*0.5, height*0.5);
-      }
-      else if (available_clients.size() > 0 ) {
-        Client cl = available_clients.get(selected_client);
-        text("client number : " + selected_client, width*0.5, height*0.5);
-        text("client name : " + cl.name, width*0.5, height*0.55);
-        
-        ip = available_clients.get(selected_client).ip;
-        port = int(available_clients.get(selected_client).port);
-      }
-    }
-  }
 }
 
 void keyReleased() {
