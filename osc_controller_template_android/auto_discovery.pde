@@ -1,6 +1,6 @@
 void auto_discovery(){
   for (int i = 0; i < g.controllers.size(); i++) {
-    Controller c = g.controllers.get(i);
+    //Controller c = g.controllers.get(i);
     if (g.tabs.value == 0) {
       textSize(fontSize);
       textAlign(CENTER, CENTER);

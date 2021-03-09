@@ -2,7 +2,7 @@
 void create_settings() {
 
   Controller c;
-  
+
   // MANUAL Config gui
   if (!AUTO_DISCOVERY) {
     c = new NumberField(width*0.25, height*.25, width*.5, eltHeight, "Ip adress");
@@ -44,7 +44,7 @@ void create_settings() {
     }
     );
   } 
-  
+
   // AUTO-DICOVERY CONFIG
   else {
 
@@ -55,7 +55,9 @@ void create_settings() {
       public void onEvent() {
         available_clients = new ArrayList();
         String []  ips = split( oscP5.ip(), '.'); // get the ip address pattern on this network
-        String broad_IP = ips[0] +"."+ ips[1]+"." + ips[2]+"." + str(255); // replace last by 255 for broadcast
+        //String broad_IP = ips[0] +"."+ ips[1]+"." + ips[2]+"." + str(255); // replace last by 255 for broadcast
+        String broad_IP = "255.255.255.255";
+        println(broad_IP, outPort);
         // send a broadcasted message
         NetAddress map = new NetAddress(broad_IP, outPort);
         OscMessage myMessage = new OscMessage("/id");
@@ -73,7 +75,6 @@ void create_settings() {
       public void onEvent() {
         selected_client += 1;
         if (selected_client > available_clients.size()-1) selected_client = 0;
-       
       }
     }
     );
@@ -85,7 +86,6 @@ void create_settings() {
       public void onEvent() {
         selected_client -= 1;
         if (selected_client < 0) selected_client = available_clients.size()-1;
-       
       }
     }
     );

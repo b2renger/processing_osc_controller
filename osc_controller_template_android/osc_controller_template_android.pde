@@ -42,9 +42,10 @@ void setup() {
   textSize(fontSize);
 
 
-  oscP5 = new OscP5(this, 12001);
-  myRemoteLocation = new NetAddress(ip, inPort);
+  oscP5 = new OscP5(this, inPort);
+  myRemoteLocation = new NetAddress(ip, outPort);
 
+  available_clients = new ArrayList();
   g = new GUI(eltHeight, pages);
 
   // add tab for each pd patch and populate it
