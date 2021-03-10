@@ -61,14 +61,14 @@ void create_settings() {
         // send a broadcasted message
         NetAddress map = new NetAddress(broad_IP, outPort);
         OscMessage myMessage = new OscMessage("/id");
-        myMessage.add(random(1122)); 
+        //myMessage.add(random(1122)); 
         oscP5.send(myMessage, map);
         // results will be received and parsed in the osc_messaging tab =>with the void oscEvent function
       }
     }
     );
 
-    c= new Button(width*0.75, height*.5, width*.05, eltHeight, ">");
+    c= new Button(width*0.85, height*.45, width*.075, eltHeight*3, ">");
     c.moveTo(0);
     g.addController(c);
     c.register(new CallBackHandler(c) {
@@ -79,7 +79,7 @@ void create_settings() {
     }
     );
 
-    c= new Button(width*0.2, height*.5, width*.05, eltHeight, "<");
+    c= new Button(width*0.05, height*.45, width*.075, eltHeight*3, "<");
     c.moveTo(0);
     g.addController(c);
     c.register(new CallBackHandler(c) {
@@ -95,9 +95,22 @@ void create_settings() {
     g.addController(c);
     c.register(new CallBackHandler(c) {
       public void onEvent() {
-
+        //oscP5 = new OscP5(this, inPort);
         myRemoteLocation = new NetAddress(ip, outPort);
         println(ip, outPort, "connecting to new remote location ...");
+        //println(c.label, c.value);
+      }
+    }
+    );
+
+    c= new Button(width*0.25, height*.85, width*.5, eltHeight, "Broadcast");
+    c.moveTo(0);
+    g.addController(c);
+    c.register(new CallBackHandler(c) {
+      public void onEvent() {
+        //oscP5 = new OscP5(this, inPort);
+        myRemoteLocation = new NetAddress("255.255.255.255", outPort);
+        println("Broadcasting on all subnets on port : " + outPort);
         //println(c.label, c.value);
       }
     }

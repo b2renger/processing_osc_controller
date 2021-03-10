@@ -7,13 +7,10 @@ OscP5 oscP5;
 NetAddress myRemoteLocation;
 
 
-String ip = "127.0.0.1";
+
 int inPort = 12000;
 int outPort = 10000;
-
-boolean AUTO_DISCOVERY = true;
-ArrayList<Client> available_clients;
-int selected_client = -1;
+String ip = "127.0.0.1";
 
 // Change the following line to add your controllers
 String[] pages = {"Settings", "Sensors", "test"}; // name of the pd patch to use as layout
@@ -26,7 +23,13 @@ color cGuifront = #FF76B0; // gui foreground
 color cCaption = #FFFFFF; // texts around
 int fontSize = 46;
 int eltHeight = 100;
+
+
+boolean AUTO_DISCOVERY = true;
 // end of custom stuff
+ArrayList<Client> available_clients;
+int selected_client = -1;
+
 
 GUI g;
 int patchWidth = 600;

@@ -1,18 +1,22 @@
 
 /*
- * based on : https://fredrikolofsson.com/f0blog/f0dmx/
- * install OSC from https://github.com/CNMAT/OSC
- * install WiFiManager from https://github.com/tzapu/WiFiManager
- * install neopixel lib from adafruit 
+   based on : https://fredrikolofsson.com/f0blog/f0dmx/
+   install OSC from https://github.com/CNMAT/OSC
+   install WiFiManager from https://github.com/tzapu/WiFiManager
+   install neopixel lib from adafruit
 */
 
-// led stuff
-#include <Adafruit_NeoPixel.h>
+// change the name to a unique one
+char *espname = "esp8266_01";
+// messaging variables
+const unsigned int outPort = 12000;          // remote port (not needed for receive)
+const unsigned int inPort = 10000;        // local port to listen for UDP packets (here's where we send the packets)
+
 // wifi stuff
 // uncomment the 3 lines below if you are working with an esp8266
-//#include <ESP8266WiFi.h>
-//#include <ESP8266WebServer.h>
-//#include <ESP8266mDNS.h>
+#include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
+#include <ESP8266mDNS.h>
 #include <DNSServer.h>
 #include <WiFiManager.h>
 #include <Ticker.h>
@@ -21,15 +25,12 @@
 #include <OSCMessage.h>
 #include <OSCBundle.h>
 #include <OSCData.h>
-
-// messaging variables
-const unsigned int outPort = 12000;          // remote port (not needed for receive)
-const unsigned int localPort = 10000;        // local port to listen for UDP packets (here's where we send the packets)
 IPAddress outIp;
 IPAddress broadIp;
 WiFiUDP Udp;
-char *espname = "esp32_01";
 
+// led stuff
+#include <Adafruit_NeoPixel.h>
 // neopixel variables
 #define PIN        14
 #define NUMPIXELS 16
@@ -49,7 +50,7 @@ void tick() {
 void setup() {
 
   Serial.begin(115200);
-  
+
   // init the lights at startup
   pixels.begin();
   for (int i = 0; i < NUMPIXELS; i++) { // For each pixel...
@@ -57,7 +58,7 @@ void setup() {
   }
   pixels.show();
 
-  
+
   // wifi stuff
   pinMode(LED, OUTPUT);
   ticker.attach(0.6, tick);// start ticker with 0.5 because we start in AP mode and try to connect
@@ -68,7 +69,7 @@ void setup() {
   ticker.detach();
   digitalWrite(LED, LOW);
 
- 
+
 }
 
 // callback from osc messages received with "/color1" adress pattern
@@ -93,17 +94,21 @@ void loop() {
       //yield();
       bundle.fill(Udp.read());
     }
+    // you can add lines here to add custom callback functions for each
+    // address pattern you send data to with your osc controller
     bundle.dispatch("/color1", colorCB);
+    // don't remove the line below though (it's needed for auto-discovery)
     bundle.dispatch("/id", broadcast_id);
   }
 
 
 }
 
-void broadcast_id(OSCMessage &msg1){
-   // sending a message broadcasted to all the network to give name ip and port
+
+// you don't need to change stuff below this line
+void broadcast_id(OSCMessage &msg1) {
+  // sending a message broadcasted to all the network to give name ip and port
   // construct a message telling ready / name of the device / ip
-  Serial.println("id message received");
   OSCMessage msg("/ready");  //announcement
   msg.add(espname);
   msg.add(int(outIp[0]));
@@ -111,17 +116,20 @@ void broadcast_id(OSCMessage &msg1){
   msg.add(int(outIp[2]));
   msg.add(int(outIp[3]));
   msg.add(outPort);
-  outIp[3] = 255;  // broadcast it to every device on the netwok IP x.x.x.255
   //send the message
-  Udp.beginPacket(outIp, outPort);
+  Udp.beginPacket(broadIp, outPort);
   msg.send(Udp);
   Udp.endPacket();
   yield();
   msg.empty();
+
+  Serial.print("id message received, broadcasting myIp : " );
+  Serial.print(outIp +":" );
+  Serial.println(inPort );
 }
 
-void broadcast_identity(){
-   // sending a message broadcasted to all the network to give name ip and port
+void broadcast_identity() {
+  // sending a message broadcasted to all the network to give name ip and port
   // construct a message telling ready / name of the device / ip
   OSCMessage msg("/ready");  //announcement
   msg.add(espname);
@@ -139,10 +147,9 @@ void broadcast_identity(){
 }
 
 void init_wifi() {
-
   WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
-//  WiFi.hostname(espname);
-//  wifi_station_set_hostname(espname);
+  //  WiFi.hostname(espname);
+  //  wifi_station_set_hostname(espname);
   //WiFiManager
   WiFiManager wm;
   // wm.resetSettings();//reset settings - for testing
@@ -163,10 +170,9 @@ void init_wifi() {
   outIp = WiFi.localIP();
   broadIp = WiFi.localIP();
   broadIp[3] = 255;// broadcast it to every device on the netwok IP x.x.x.255
-  Udp.begin(localPort);
+  Udp.begin(inPort);
 
 }
-
 
 //gets called when WiFiManager enters configuration mode
 void configModeCallback (WiFiManager *myWiFiManager) {

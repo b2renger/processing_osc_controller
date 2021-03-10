@@ -14,7 +14,9 @@ void auto_discovery(){
         text("client name : " + cl.name, width*0.5, height*0.55);
         
         ip = available_clients.get(selected_client).ip;
-        outPort = int(available_clients.get(selected_client).port);
+        //outPort = int(available_clients.get(selected_client).port);
+        /* for some reason "receiver_processing_template" doesn't broadcast the right port number
+        so every communication will  happen on the outPort given at the start of the program*/
       }
     }
   }

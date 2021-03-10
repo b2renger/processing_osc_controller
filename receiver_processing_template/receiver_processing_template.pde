@@ -7,6 +7,7 @@ import oscP5.*;
 import netP5.*;
 
 OscP5 oscP5;
+NetAddress myRemoteLocation;
 
 String sketchName = "processing_test";
 int inPort = 10000;
@@ -34,6 +35,8 @@ void setup() {
    port needs to match the one you are sending to !
    */
   oscP5 = new OscP5(this, inPort);
+  println(oscP5.ip(), inPort);
+  myRemoteLocation = new NetAddress("127.0.0.1", outPort);
 
   c = color(255, 0, 0);
   xpos = width*.5;
@@ -63,18 +66,19 @@ Parsing occurs here !
  */
 void oscEvent(OscMessage theOscMessage) {
   /* check if theOscMessage has the address pattern we are looking for. */
-  //print("### received an osc message.");
+  println("### received an osc message.");
 
   // this first one is for auto-identification - it shouldn't have to be edited
   if (theOscMessage.checkAddrPattern("/id")==true) { 
-    println("id requested");
+    println("id response " + inPort);
     OscMessage myMessage = new OscMessage("/ready");
     myMessage.add(sketchName); 
     myMessage.add("/" + oscP5.ip()); 
-    myMessage.add(inPort); 
+    myMessage.add(str(inPort)); 
     String []  ips = split( oscP5.ip(), '.'); // get the ip address pattern on this network
     String broad_IP = ips[0] +"."+ ips[1]+"." + ips[2]+"." + str(255); // replace last by 255 for broadcast
     // send a broadcasted message
+    //println(oscP5.ip(), inPort);
     NetAddress map = new NetAddress(broad_IP, outPort);
     oscP5.send(myMessage, map);
     return;
