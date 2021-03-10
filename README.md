@@ -2,12 +2,20 @@
 
 The goal is to build osc compliant applications with processing but streamlining the process. Those application are compatible with the android mode of processing, thus enabling to create custom on the fly osc controller applications for android.
 
-The process will consist of using Pure-Data as a WYSIWYG editor for interfaces. This program distributed here will parse the pd patch to create the rigthfull gui elements through controlP5.
+The process will consist of using Pure-Data as a WYSIWYG editor for interfaces. This program distributed here will parse the pd patch to create the rigthfull gui elements in a processing application.
+
+Wireframe with pure-data :
+
+<img src="assets/pd.png" width="240" height="340" /></br>
+
+Final processing application (connection page + interface):
+
+<img src="assets/p5_1.png" width="240" height="340" />  <img src="assets/p5_2.png" width="240" height="340" />
 
 As a user you would essentially care for :
 - osc_controller_template : to launch/create desktop applications.
 - osc_crontroller_template_android : to launch/create android applications.
-- any example beginning with "receiver" depending on where you want the data.
+- any example beginning with "receiver" depending on where you want to receive the data.
 
 ## How to run ?
 - create a pd patch with gui elements
@@ -21,6 +29,67 @@ As a user you would essentially care for :
 - click run (you should see a replicate of the interface you built but with osc networking options)
 
 - (optionally) run in android-mode to get an android app.
+
+
+## Software dependencies
+
+- OSCP5 lib for processing
+- android mode for processing (optional - for android)
+- ketai for android (optional - for android)
+
+## What's what ?
+
+### What are all those files ?
+
+* **osc_controller_template.pde :** : the template you should use to get started with processing and make desktop controller apps.
+* **osc_controller_template_android.pde :** the template you should use to get started with processing-android and make android controller apps.
+* **receiver_arduino_esp8266.ino** a barebones template for esp8266 boards (tested with Adafruit's Feather HUZZAH Esp8266 wifi).
+* **receiver_arduino_ESP32_ESP8266.ino** a more complete template for esp8266 and esp32 boards (tested with Adafruit's Feather HUZZAH Esp8266 wifi).
+* **receiver_processing_template** a complete template to receive data from a controller in processing.
+* **ui_color_gradient.pde** this is just a sketch to create a color gradient.
+* **ui_tests.pde** desktop tests for the ui classes.
+* **ui_tests_android.pde** android tests for the ui classes.
+
+
+### What is OSC ?
+
+OSC is a way to format messages for wireless communication over the UDP protocol. That means that you can send messages from one device to another using a naming convention.
+This naming convention will be used to parse the message on the client side (receiver of the information).
+
+### What is Pure-data and why ?
+
+Pure-Data is an awesome piece of software it is the swiss-knife of real time audio programming in a visual fashion and it's completly free. You can find it here [Pure-Data](http://msp.ucsd.edu/software.html).
+
+In this project it's just used for its graphical interface : you can create gui elements, name them, and place them; nothing more. The fact is that pd stores its patches in a text file format with all the information we need; so it's easy to parse and easy to generate a coded interface without having to actually code everything.
+
+The result will be responsive interface on you screen if you respect more or less the given aspect ratio. Elements should be placed and scaled according to your initial interface in you final program.
+
+## How to use Pure-data ?
+
+Once installed Pure-Data, will open up a blank canvas for you. I sugget you open the *"pd_template_600x800.pd"* to start with. 
+
+You can create elements (with the "Put" menu)
+* a **bang** which will become a **button** 
+* a **toggle** which will stay the same
+* vertical and horizontal **sliders**
+* vertical and horizontal **radio buttons**
+* **text**
+* a **canvas** but this one is a bit specific. You can either create a **touch interface** or a **color selector** from it : you just need to fill the "receiver symbol" field with either *touch* or *color*.
+<img src="assets/pd_msg.png" width="480" height="100" />
+
+You can then move and re-arrange them. 
+You can also right click on them and access their "properties". Which will enable you to change their scale, the range of values they will send etc.
+
+It's important to **name** your elements will the label field in their properties. This name will be used to configure the sending pattern of the value behind each gui element.
+
+For instance if you name a button "toggle1" the osc message will use the pattern "/toggle1" to send the value of this gui element.
+
+## Anrdoid How-to
+
+Processing has an android mode.
+
+## Code breakdown
+
 
 ## What should be supported ?
 
@@ -37,23 +106,9 @@ As a user you would essentially care for :
 * [x] support multiple screen sizes
 * [x] edit multiple page layouts
 * [x] customize colors
-* [ ] specific android version with sensors data and fixes (like keyboard popping in textfields)
+* [x] auto discovery of available devices
+* [x] broadcast data to every device
+* [x] specific android version with sensors data and fixes (like keyboard popping in textfields)
     * [x] keyboard pop when needed
     * [x] audio input
     * [ ] 
-
-
-## Software dependencies
-
-- OSCP5 lib for processing
-- android mode for processing (optional - for android)
-- ketai for android (optional - for android)
-
-
-## What is OSC ?
-
-## What is Pure-data ?
-
-## How to build an interface with Pure-Data ?
-
-## Anrdoid How-to
