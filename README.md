@@ -84,15 +84,35 @@ It's important to **name** your elements will the label field in their propertie
 
 For instance if you name a button "toggle1" the osc message will use the pattern "/toggle1" to send the value of this gui element.
 
+## What can I customize without coding ?
+
+
+
 ## Anrdoid How-to
 
-Processing has an android mode.
+Processing has an android mode and it's pretty nice ! => [processing-android](https://android.processing.org/)
+
+That means that once installed you can easily build and android app for your controller. The android version also supports an additional (optional) tab to send the data from most common embeded sensors.
+
 
 ## Code breakdown
+
+### Architecture
+
+### How to add new guis
+
+### Adding callback to a gui element
+
+### the pd parser
+
+### send data
+
+### Auto-discovery : how does it work
 
 
 ## What should be supported ?
 
+### GUI
 * [x] buttons
 * [x] toggles
 * [x] horizontal sliders
@@ -103,12 +123,23 @@ Processing has an android mode.
 * [x] color selector
 * [x] text
 
+### Features
 * [x] support multiple screen sizes
 * [x] edit multiple page layouts
 * [x] customize colors
-* [x] auto discovery of available devices
+* [x] auto discovery of available devices and manual
 * [x] broadcast data to every device
-* [x] specific android version with sensors data and fixes (like keyboard popping in textfields)
+* [x] specific android version with sensors data
     * [x] keyboard pop when needed
     * [x] audio input
-    * [ ] 
+    * [ ] accelerometer
+    * [ ] orientation
+    * [ ] light 
+    * [ ] ...
+
+### Examples
+* [x] processing receiver
+* [x] esp8266 and esp32 receivers
+* [ ] touch designer receiver
+* [ ] unity receiver
+* [ ] unreal receiver ?
