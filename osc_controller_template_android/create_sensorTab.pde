@@ -167,9 +167,43 @@ void draw_sensors() {
   ellipse(width*.8, height*.55 + width*0.05, 10 + rad, 10  +rad);
   text(" accel Z : " + nf(accYAvg, 0, 3), width*0.5, height*.55 + width*0.05);
 
-
-
   // orientation
+  // orientation X
+  for (int i = 0; i < oriX.size(); i++) {
+    if (i != oriX.size()-1) {  
+      float v = oriX.get(i);
+      float vn = oriX.get(i+1);
+      line(map(i, 0, oriX.size(), 0, width), map(v, -1, 1, height*0.7, height*0.75), 
+        map(i+1, 0, oriX.size(), 0, width), map(vn, -1, 1, height*0.7, height*0.75));
+    }
+  }
+  rad = map(abs(oriXAvg), 0, 1, 0, 50);
+  ellipse(width*.8, height*.7 + width*0.05, 10 + rad, 10  +rad);
+  text(" orientation X : " + nf(oriXAvg, 0, 3), width*0.5, height*.7 + width*0.05);
+  // orientation y
+  for (int i = 0; i < oriY.size(); i++) {
+    if (i != oriY.size()-1) {  
+      float v = oriY.get(i);
+      float vn = oriY.get(i+1);
+      line(map(i, 0, oriY.size(), 0, width), map(v, -1, 1, height*0.75, height*0.8), 
+        map(i+1, 0, oriY.size(), 0, width), map(vn, -1, 1, height*0.75, height*0.8));
+    }
+  }
+  rad = map(abs(oriYAvg), 0, 1, 0, 50);
+  ellipse(width*.8, height*.75 + width*0.05, 10 + rad, 10  +rad);
+  text(" orientation Y : " + nf(oriYAvg, 0, 3), width*0.5, height*.75 + width*0.05);
+   // orientation Z
+  for (int i = 0; i < oriZ.size(); i++) {
+    if (i != oriZ.size()-1) {  
+      float v = oriZ.get(i);
+      float vn = oriZ.get(i+1);
+      line(map(i, 0, oriZ.size(), 0, width), map(v, -1, 1, height*0.8, height*0.85), 
+        map(i+1, 0, oriZ.size(), 0, width), map(vn, -1, 1, height*0.8, height*0.85));
+    }
+  }
+  rad = map(abs(oriZAvg), 0, 1, 0, 50);
+  ellipse(width*.8, height*.8 + width*0.05, 10 + rad, 10  +rad);
+  text(" orientation Z : " + nf(oriZAvg, 0, 3), width*0.5, height*.8 + width*0.05);
 }
 
 void update_sensors() {
@@ -182,6 +216,12 @@ void update_sensors() {
     sendFloatMessage("/accX", accXAvg);
     sendFloatMessage("/accY", accYAvg);
     sendFloatMessage("/accZ", accZAvg);
+  }
+
+  if (oriOn) { 
+    sendFloatMessage("/oriX", accXAvg);
+    sendFloatMessage("/oriY", accYAvg);
+    sendFloatMessage("/oriZ", accZAvg);
   }
 }
 
@@ -239,7 +279,23 @@ void onAccelerometerEvent(float x, float y, float z) {
 }
 
 // orientation event
-void onRotationVectorEvent(float x, float y, float z) {
-  
-  
+void onGameRotationEvent(float x, float y, float z) {
+  if (oriOn) {
+    oriX.add(x);
+    oriY.add(y);
+    oriZ.add(z);
+
+    if (oriX.size()> 30) oriX.remove(0);
+    if (oriY.size()> 30) oriY.remove(0);
+    if (oriZ.size()> 30) oriZ.remove(0);
+
+    for (int i = 0; i < oriX.size(); i ++) {
+      oriXAvg += oriX.get(i);
+      oriYAvg += oriY.get(i);
+      oriZAvg += oriZ.get(i);
+    }
+    oriXAvg = oriXAvg / (float) oriX.size() ;
+    oriYAvg = oriYAvg / (float) oriY.size() ;
+    oriZAvg = oriZAvg / (float) oriZ.size() ;
+  }
 }
