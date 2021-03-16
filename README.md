@@ -132,9 +132,9 @@ That means that once installed you can easily build and android app for your con
 * [x] specific android version with sensors data
     * [x] keyboard pop when needed
     * [x] audio input
-    * [ ] accelerometer
-    * [ ] orientation
-    * [ ] light 
+    * [x] accelerometer
+    * [x] orientation
+    * [x] light 
     * [ ] ...
 
 ### Examples
