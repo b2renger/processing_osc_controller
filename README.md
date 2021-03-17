@@ -94,6 +94,10 @@ Processing has an android mode and it's pretty nice ! => [processing-android](ht
 
 That means that once installed you can easily build and android app for your controller. The android version also supports an additional (optional) tab to send the data from most common embeded sensors.
 
+Here is a snapshot of the sensor tab :
+
+<img src="assets/sensor_tab.png" width="240" height="340" /> 
+
 
 ## Code breakdown
 
